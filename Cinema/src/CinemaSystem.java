@@ -10,6 +10,7 @@ public class CinemaSystem {
 	private ArrayList<Reservation> reservations; 
 	private ArrayList<User> members;
 	private FileIO fileIO;
+
 	private BufferedReader br;	
 	
 	public void run() {
