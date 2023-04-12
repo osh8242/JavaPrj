@@ -23,7 +23,7 @@ public class Theater {
 	
 	public String getMovie() {
 		return movie;
-	}
+	} 
 	public void setMovie(String movie) {
 		this.movie = movie;
 	}
