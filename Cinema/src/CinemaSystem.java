@@ -11,7 +11,7 @@ public class CinemaSystem {
 	private ArrayList<User> members;
 	private FileIO fileIO;
 	private BufferedReader br;
-	private int inputValue;
+	public int inputValue;
 	
 	public void run() {
 		
