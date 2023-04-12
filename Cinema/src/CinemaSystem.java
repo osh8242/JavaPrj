@@ -71,7 +71,7 @@ public class CinemaSystem {
 	
 	public void showMembers() {
 		for (User m : members) {
-			User.
+//			User.
 		}
 	}
 	
