@@ -29,11 +29,9 @@ public class ReservationProcess {
 	}
 	
 	private void showMovieList() {
-<<<<<<< HEAD
+
 //		reservation.get
-=======
-		//reservation.get
->>>>>>> d9a1287ef92e6bfe925ecbfc0158326151f7f199
+
 	}
 	
 	private void createReservation() {
