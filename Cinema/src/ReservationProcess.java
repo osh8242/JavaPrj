@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
 public class ReservationProcess {
+
 	private CinemaSystem cinemaSystem;
 	private Reservation reservation;
 	private int[] selectedSeat;
-	
+  
 	public ReservationProcess(CinemaSystem cinemaSystem, Reservation reservation) {
 		this.cinemaSystem = cinemaSystem;
 		this.reservation = reservation;
@@ -47,7 +48,5 @@ public class ReservationProcess {
 		return true;
 	}
 
-	
-	
-	
+
 }
