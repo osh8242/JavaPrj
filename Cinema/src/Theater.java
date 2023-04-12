@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Theater {
+public class Theater implements Serializable{
 	private String movie;
 	private String[][] seat;
 	private boolean isImax;
@@ -47,8 +48,9 @@ public class Theater {
 
 	@Override
 	public String toString() {
-		return "Theater [movie: " + movie + ", seat: " + Arrays.toString(seat) + ", isImax: " + isImax + ", price: " + price
-				+ "]";
+//		return "Theater [movie: " + movie + ", seat: " + Arrays.toString(seat) + ", isImax: " + isImax + ", price: " + price
+//				+ "]";
+		return "Theater [movie: " + movie + ", seat: " + ", isImax: " + isImax + ", price: " + price + "]";
 	}
 	
 	public void showSeat() {

@@ -29,7 +29,7 @@ public class ReservationProcess {
 	}
 	
 	private void showMovieList() {
-		reservation.get
+//		reservation.get
 	}
 	
 	private void createReservation() {
