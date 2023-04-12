@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CinemaSystem {
 	
-	private boolean isLoggedIn;
+	public boolean isLoggedIn;
 	private ReservationProcess reservationProcess;
 	private ArrayList<Theater> theaters;
 	private ArrayList<Reservation> reservations; 
@@ -73,15 +73,21 @@ public class CinemaSystem {
 		for(Member m : members) {
 			if(m.getUserId().equals(id)) {
 				System.out.print("비밀번호를 입력해주세요 : ");
+				if(m.getUserPassword().equals(getStringValue())) {
+					System.out.println("로그인 성공!");
+					return m;
+				} else {
+					System.out.println("비밀번호가 올바르지 않습니다.");
+				}
 			}
 		}
-		return user;
+		return null;
 	}
 	
 	public void showRevenue() {
 		int revenueSum = 0;
 		for(Reservation r : reservations) {
-			//revenueSum += r.getTheater.getPrice();
+			revenueSum += r.getTheater().getPrice();
 		}
 		System.out.println("총 판매액 : " + revenueSum);
 	}
@@ -93,11 +99,49 @@ public class CinemaSystem {
 	}
 	
 	public void showMembers() {
-
 		for (Member m : members) {
 			System.out.println(m.toString());
-
 		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public boolean isLoggedIn() {
+		return isLoggedIn;
+	}
+
+	public void setLoggedIn(boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
+	}
+
+	public ArrayList<Theater> getTheaters() {
+		return theaters;
+	}
+
+	public void setTheaters(ArrayList<Theater> theaters) {
+		this.theaters = theaters;
+	}
+
+	public ArrayList<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(ArrayList<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public ArrayList<Member> getMembers() {
+		return members;
+	}
+
+	public void setMembers(ArrayList<Member> members) {
+		this.members = members;
 	}
 	
 	
