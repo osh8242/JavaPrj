@@ -1,8 +1,8 @@
 
 public class Guest extends User {
 
-	public Guest(int userPhoneNumber, String userPassword) {
-		super(userPhoneNumber, userPassword);
+	public Guest(String userPassword) {
+		super(userPassword);
 	}
 
 }
