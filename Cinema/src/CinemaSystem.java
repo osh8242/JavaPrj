@@ -10,15 +10,13 @@ public class CinemaSystem {
 	private ArrayList<Reservation> reservations; 
 	private ArrayList<User> members;
 	private FileIO fileIO;
-	private BufferedReader br;
-	private int inputValue;
+	private BufferedReader br;	
 	
 	public void run() {
 		
 		outer: while(true) {
-			firstDisplayPrint();
-			getInputValue();
-			switch(inputValue) {
+			firstDisplayPrint();			
+			switch(getInputValue()) {
 				case 1:{//1.회원 로그인
 					//login()					
 					//ReservationProcess reservationProcess = new ReservationProcess();
@@ -38,19 +36,16 @@ public class CinemaSystem {
 			}
 		}
 		
-		
-		
-		
-		
 	}
 	
-	public void getInputValue() {
+	public int getInputValue() {
 		this.br = new BufferedReader(new InputStreamReader(System.in));
 		try {
-			this.inputValue = Integer.parseInt(br.readLine());
+			return Integer.parseInt(br.readLine());
 		} catch (Exception e) {
 			System.out.println("숫자를 입력해주세요");
-		}		
+			return getInputValue();
+		} 	
 	}
 	
 	public void firstDisplayPrint() {
@@ -70,6 +65,12 @@ public class CinemaSystem {
 	public void showReservations() {
 		for(Reservation r : reservations) {
 			//System.out.println(r.toString());
+		}
+	}
+	
+	public void showMembers() {
+		for (User m : members) {
+			User.
 		}
 	}
 	
