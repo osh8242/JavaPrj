@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Reservation {
+public class Reservation implements Serializable{ //,, Dataset{
 
 	private int reservationNo;
 	private User user;
@@ -44,6 +45,10 @@ public class Reservation {
 		return "Reservation [reservationNo : " + reservationNo + ", user : " + user + ", theater : " + theater + ", seat : "
 				+ Arrays.toString(seat) + "]";
 	}
+//	@Override
+//	public String getClassName() {
+//		return "Reservation";
+//	}
 	
 	
 }

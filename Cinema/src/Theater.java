@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.Arrays;
 
-public class Theater implements Serializable{
+public class Theater implements Serializable{ //,, Dataset{
 	private String movie;
 	private String[][] seat;
 	private boolean isImax;
@@ -14,9 +14,10 @@ public class Theater implements Serializable{
 		// 좌석 배열 초기화
 		for(int i=0; i < seatSize[0]; i++) {
 			for(int j = 0; j<seatSize[1]; j++) {
-				System.out.printf("[%d-%d]",i+1,j+1);
+				seat[i][j] = "[" +(i+1)+"-"+(j+1)+"]";
+				//System.out.printf(seat[i][j]);
 			}
-			System.out.println();
+			//System.out.println();
 		}
 		this.isImax = isImax;
 		this.price = (isImax) ? 25000:15000;
@@ -48,8 +49,6 @@ public class Theater implements Serializable{
 
 	@Override
 	public String toString() {
-//		return "Theater [movie: " + movie + ", seat: " + Arrays.toString(seat) + ", isImax: " + isImax + ", price: " + price
-//				+ "]";
 		return "Theater [movie: " + movie + ", seat: " + ", isImax: " + isImax + ", price: " + price + "]";
 	}
 	
@@ -61,6 +60,11 @@ public class Theater implements Serializable{
 			System.out.println();
 		}
 	}
+
+//	@Override
+//	public String getClassName() {
+//		return "Theater";
+//	}
 	
 	
 	

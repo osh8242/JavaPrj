@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Member extends User {
+public class Member extends User implements Serializable { //, Dataset{
 	private int userPhoneNumber;
 	private String userId;
 	private String userName;
@@ -23,7 +24,7 @@ public class Member extends User {
 		this.isAdmin = isAdmin;
 	}
 	
-	public String getUserId() {
+	public String getUserId() {          
 		return userId;
 	}
 	public void setUserId(String userId) {
@@ -51,6 +52,10 @@ public class Member extends User {
 		return "Member [userPhoneNumber: " + userPhoneNumber + ", userId: " + userId + ", userName: " + userName
 				+ ", userPoint: " + userPoint + ", isAdmin: " + isAdmin + "]";
 	}
+//	@Override
+//	public String getClassName() {
+//		return "Member";
+//	}
 	
 	
 
