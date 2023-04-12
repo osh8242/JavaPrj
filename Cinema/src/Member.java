@@ -41,7 +41,13 @@ public class Member extends User {
 	public void setUserPoint(int userPoint) {
 		this.userPoint = userPoint;
 	}
+<<<<<<< HEAD
 	
+=======
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+>>>>>>> d9a1287ef92e6bfe925ecbfc0158326151f7f199
 	@Override
 	public String toString() {
 		return "Member [userPhoneNumber: " + userPhoneNumber + ", userId: " + userId + ", userName: " + userName

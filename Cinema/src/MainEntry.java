@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class MainEntry {
 
 	public static void main(String[] args) {
+
 		CinemaSystem cs = new CinemaSystem();		
 //		cs.run();
 		
@@ -15,6 +16,7 @@ public class MainEntry {
 		///////////////////////////////////////////////
 		
 		
+
 	}
 
 }
