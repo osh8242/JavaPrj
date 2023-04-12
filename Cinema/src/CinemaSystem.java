@@ -10,6 +10,7 @@ public class CinemaSystem {
 	private ArrayList<Reservation> reservations; 
 	private ArrayList<Member> members;
 	private FileIO fileIO;
+
 	private BufferedReader br;	
 	
 	public void run() {
@@ -92,8 +93,10 @@ public class CinemaSystem {
 	}
 	
 	public void showMembers() {
+
 		for (Member m : members) {
 			System.out.println(m.toString());
+
 		}
 	}
 	
