@@ -21,8 +21,13 @@ public class Member extends User {
 		this.userName = userName;
 		this.userPoint = -10000;
 		this.isAdmin = isAdmin;
+	}	
+	public int getUserPhoneNumber() {
+		return userPhoneNumber;
 	}
-	
+	public void setUserPhoneNumber(int userPhoneNumber) {
+		this.userPhoneNumber = userPhoneNumber;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -42,7 +47,10 @@ public class Member extends User {
 		this.userPoint = userPoint;
 	}
 	public boolean isAdmin() {
-		return isAdmin;
+		return isAdmin;		
+	}	
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 	@Override
 	public String toString() {
