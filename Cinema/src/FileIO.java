@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public class FileIO {
 	public CinemaSystem cs;
 
-		String path = "D:\\JavaPrj\\IOtest\\"; // 승환
-//		String path = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest"; // 나은
+//		String path = "D:\\JavaPrj\\IOtest\\"; // 승환
+		String path = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\"; // 나은
 //		String path = "C:\\Team4\\IOtest"; // 석진
 //		String path = "C:\\Users\\KOSA\\TeamProject\\IOtest\\"; // 창현
 
@@ -42,8 +42,8 @@ public class FileIO {
 			Theater theater2 = (Theater) cs.theaters.get(1);
 			User user1 = (User) cs.members.get(0);
 			User user2 = (User) cs.members.get(1);
-//			cs.reservations.add(new Reservation( user1, theater1, new int[]{3,4}));
-//			cs.reservations.add(new Reservation( user2, theater2, new int[]{1,1}));
+			cs.reservations.add(new Reservation( user2, theater2, new int[]{1,1}));
+			cs.reservations.add(new Reservation( user2, theater1, new int[]{1,1}));
 
 			// 임시 데이터 파일로 저장
 			saveDataset(cs.theaters, "Theater");

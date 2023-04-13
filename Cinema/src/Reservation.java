@@ -24,6 +24,7 @@ public class Reservation implements Serializable {
 
 	}
 
+
 	public String getReservationNo() {
 		return reservationNo;
 	}

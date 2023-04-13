@@ -29,7 +29,7 @@ public class CinemaSystem {
 
 		this.theaters = new ArrayList<Theater>();
 		this.members = new ArrayList<Member>();
-		this.reservations = new ArrayList<Reservation>();
+		this.reservations = new ArrayList<Reservation>(1);
 		this.AdminOs = new AdminOS(this);
 		this.fileIO = new FileIO(this);
 		this.userLoggedIn = null;
@@ -44,26 +44,43 @@ public class CinemaSystem {
 	}
 
 	public void run() {
-		while (true) {
-			firstDisplayPrint();
-			switch (getInputValue()) {
-			case 1: {// 1.회원 로그인 / 회원예매하기
-				userLoggedIn = login();
-				if (userLoggedIn == null)
-					break;
-				if (!userLoggedIn.isAdmin()) {
-					reservationProcess.showReservationMenu(isLoggedIn);
-				} else { // 관리자라면
-					AdminOs = new AdminOS(this);
-					AdminOs.run();
-				}
-				isLoggedIn = !isLoggedIn;
-				userLoggedIn = null;
-				break;
-			}
-			}
-		}
-	}
+	      while (true) {
+	         firstDisplayPrint();
+	         switch(getInputValue()) {
+	            case 1:{//1.회원 로그인 / 회원예매하기
+	               userLoggedIn = login();
+	               if(userLoggedIn == null) break;
+	               if(!userLoggedIn.isAdmin()) {
+	                  ReservationProcess reservationProcess = new ReservationProcess(this);
+	                  reservationProcess.showReservationMenu(isLoggedIn);
+	                  isLoggedIn = !isLoggedIn;
+	                  userLoggedIn = null;
+	               } else { //관리자라면   
+	                   AdminOs = new AdminOS(this);
+	                   AdminOs.run();
+	                   isLoggedIn = !isLoggedIn;
+	                   userLoggedIn = null;
+	               }
+	               break;
+	               
+	            } //로그인
+	            case 2:{//2.비회원으로 예매
+	               ReservationProcess reservationProcess = new ReservationProcess(this);
+	               reservationProcess.showReservationMenu(isLoggedIn);
+	               break;
+	            }            
+	            case 3: {// 3.회원가입
+	               createUser();
+	               break;
+	            }
+	            case 4: {
+	               if (isLoggedIn)
+	                  isLoggedIn = !isLoggedIn;
+	               break;
+	            }
+	         }// swtich
+	      } // while
+	   }// run()
 
 	// 데이터 저장하는 함수
 	public void saveDatasets(ArrayList savingDataset, String fileName) {
@@ -77,7 +94,6 @@ public class CinemaSystem {
 		this.theaters = fileIO.loadDataset("Theater");
 		this.members = fileIO.loadDataset("Member");
 		this.reservations = fileIO.loadDataset("Reservation");
-		System.out.println(this.reservations.get(0).toString());
 //		System.out.println("로딩완료");
 	}
 
