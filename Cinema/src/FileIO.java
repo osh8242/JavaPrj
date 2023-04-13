@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileIO {
+
 		String path = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\";
 	// 데이터 불러오기 함수
 		public ArrayList Input(String fileName) {
+
 //			String fileName =  (loadingDataset instanceof Theater) ? "Theater" :((loadingDataset instanceof Member) ? "Member" :(loadingDataset instanceof Reservation) ? "Reservation" : "noName");
 			
 			String filePath = path+fileName+".txt";
