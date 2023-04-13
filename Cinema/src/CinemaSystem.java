@@ -103,8 +103,8 @@ public class CinemaSystem {
 	}
 
 	// 데이터 저장하는 함수
-	private void saveDatasets(ArrayList savingDataset, String fileName) {
-		System.out.println("데이터 파일을 저장중...");
+	public void saveDatasets(ArrayList savingDataset, String fileName) {
+		System.out.println(fileName + " 파일을 저장중...");
 		fileIO.saveDataset(savingDataset, fileName);
 		System.out.println("저장완료");
 	}

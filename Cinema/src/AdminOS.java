@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class AdminOS {
@@ -6,6 +8,7 @@ public class AdminOS {
 	public ArrayList<Theater> theaters;
 	public ArrayList<Reservation> reservations; 
 	public ArrayList<Member> members;
+	private BufferedReader br;
 	
 	public AdminOS(CinemaSystem cinemaSystem) {
 		this.cs = cinemaSystem;
@@ -54,7 +57,8 @@ public class AdminOS {
 					break;
 				}
 				case 6:{ //파일저장
-					
+					saveDatasetMenu();
+					break;
 				}
 				case 0:{ //관리자모드 끝내기
 					break outerAdmin;
@@ -221,5 +225,48 @@ public class AdminOS {
 			}			
 		}
 	} // editmember()
+	
+	private void saveDatasetMenu() {
+		int selectedNum;
+		System.out.println("저장할 데이터 선택 :");
+		System.out.println("[1.영화-상영관 정보 저장]\t[2.예약내역 저장]\t[3.회원정보 저장]\t[4. 모든 데이터 저장]");
+		System.out.print("입력> ");
+		this.br = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			selectedNum = Integer.parseInt(br.readLine());
+			
+		} catch (Exception e) {
+			System.out.println("숫자를 입력해주세요");
+			selectedNum = 0;
+		} 	
+		outer : while(true) {
+			switch(selectedNum) {
+			case 1: 
+				System.out.println("영화-상영관 정보를 저장합니다.");
+				cs.saveDatasets(this.theaters, "Theater");
+				break outer;
+			case 2:
+				System.out.println("예약내역를 저장합니다.");
+				cs.saveDatasets(this.members, "Member");
+				break outer;
+			case 3:
+				System.out.println("회원정보를 저장합니다.");
+				cs.saveDatasets(this.reservations, "Reservation");
+				break outer;
+			case 4:
+				System.out.println("모든 데이터를 저장합니다.");
+				cs.saveDatasets(this.theaters, "Theater");
+				cs.saveDatasets(this.members, "Member");
+				cs.saveDatasets(this.reservations, "Reservation");
+				break outer;
+				default:{
+					System.out.println("잘못된 값을 입력하셨습니다.");
+				}
+			}	
+		}
+		System.out.println();
+		
+	
+	}
 
 } //class
