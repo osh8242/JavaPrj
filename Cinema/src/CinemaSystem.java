@@ -26,9 +26,9 @@ public class CinemaSystem {
 		this.AdminOs = new AdminOS(this);
 		this.userLoggedIn = null;
 		this.fileIO = new FileIO();
-		setDatasets();// 초기데이터 셋팅 : 기능 구현 후 삭제
+//		setDatasets();// 초기데이터 셋팅 : 데이터파일 최초 생성시에만
 		getDatasets();// 입력(데이터 불러오기)
-//		System.out.println(this.theaters.get(0));
+
 		System.out.println("완료.");
 
 		this.br = br;
@@ -88,8 +88,8 @@ public class CinemaSystem {
 		Theater theater2 = (Theater) this.theaters.get(1);
 		User user1 = (User) this.members.get(0);
 		User user2 = (User) this.members.get(1);
-//		this.reservations.add(new Reservation( user1, theater1, new int[]{3,4}));
-//		this.reservations.add(new Reservation( user2, theater2, new int[]{1,1}));
+		//this.reservations.add(new Reservation( user1, theater1, new int[]{3,4}));
+		//this.reservations.add(new Reservation( user2, theater2, new int[]{1,1}));
 		// 임시 데이터 파일로 저장(출력)
 		fileIO.saveDataset(this.theaters, "Theater");
 		fileIO.saveDataset(this.members, "Member");

@@ -13,14 +13,12 @@ import java.util.ArrayList;
 public class FileIO {
 
 //		String path = "D:\\JavaPrj\\IOtest\\"; // 승환
-//		String path = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest"; // 나은
-	String path = "C:\\Team4\\IOtest"; // 석진
+		String path = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\"; // 나은
+//	    String path = "C:\\Team4\\IOtest"; // 석진
 //		String path = "C:\\Users\\KOSA\\TeamProject\\IOtest\\"; // 창현
 
 	// 데이터 불러오기 함수
 	public ArrayList loadDataset(String fileName) {
-
-//			String fileName =  (loadingDataset instanceof Theater) ? "Theater" :((loadingDataset instanceof Member) ? "Member" :(loadingDataset instanceof Reservation) ? "Reservation" : "noName");
 
 		String filePath = path + fileName + ".txt";
 		System.out.println("불러오기 경로 : " + filePath);
