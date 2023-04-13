@@ -6,9 +6,9 @@ public class CinemaSystem {
 	
 	public boolean isLoggedIn;
 	private ReservationProcess reservationProcess;
-	private ArrayList<Theater> theaters;
-	private ArrayList<Reservation> reservations; 
-	private ArrayList<Member> members;
+	public ArrayList<Theater> theaters;
+	public ArrayList<Reservation> reservations; 
+	public ArrayList<Member> members;
 	private FileIO fileIO;
 	private BufferedReader br;	
 	private Member userLoggedIn;
@@ -327,30 +327,6 @@ outerMain: while(true) {
 
 	public void setLoggedIn(boolean isLoggedIn) {
 		this.isLoggedIn = isLoggedIn;
-	}
-
-	public ArrayList<Theater> getTheaters() {
-		return theaters;
-	}
-
-	public void setTheaters(ArrayList<Theater> theaters) {
-		this.theaters = theaters;
-	}
-
-	public ArrayList<Reservation> getReservations() {
-		return reservations;
-	}
-
-	public void setReservations(ArrayList<Reservation> reservations) {
-		this.reservations = reservations;
-	}
-
-	public ArrayList<Member> getMembers() {
-		return members;
-	}
-
-	public void setMembers(ArrayList<Member> members) {
-		this.members = members;
 	}
 	
 

@@ -17,7 +17,7 @@ public class FileIO {
 		public ArrayList<Serializable> Input(String fileName) {
 //			String fileName =  (loadingDataset instanceof Theater) ? "Theater" :((loadingDataset instanceof Member) ? "Member" :(loadingDataset instanceof Reservation) ? "Reservation" : "noName");
 			
-			String filename = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\"+fileName+".txt";
+			String filename = "D:\\JavaPrj\\IOtest\\"+fileName+".txt";
 			System.out.println("불러오기 경로 : "+filename);
 			FileInputStream fis = null;
 			BufferedInputStream bis = null;
@@ -67,9 +67,9 @@ public class FileIO {
 	       ObjectOutputStream out=null;
 
 	       try {
-	    	   String filename = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\"+fileName+".txt";
+	    	   String filename = "D:\\JavaPrj\\IOtest\\"+fileName+".txt";
 	    	   System.out.println("저장하기 경로 : "+filename);
-	           fos = new FileOutputStream("C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\"+fileName+".txt");
+	           fos = new FileOutputStream("D:\\JavaPrj\\IOtest\\"+fileName+".txt");
 	           bos = new BufferedOutputStream(fos);
 	           out = new ObjectOutputStream(bos);
 	         
