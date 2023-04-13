@@ -13,7 +13,7 @@ import java.util.List;
 
 public class FileIO {
 
-		String path = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\";
+		String path = "D:\\JavaPrj\\IOtest\\";
 	// 데이터 불러오기 함수
 		public ArrayList loadDataset(String fileName) {
 
