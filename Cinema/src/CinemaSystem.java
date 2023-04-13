@@ -23,9 +23,9 @@ public class CinemaSystem {
 		
 		this.theaters = new ArrayList<Theater>();
 		this.members = new ArrayList<Member>();
-		this.reservations = new ArrayList<Reservation>();
+		this.reservations = new ArrayList<Reservation>();		
 		this.AdminOs = new AdminOS(this);
-		
+		this.userLoggedIn = null;
 		this.fileIO = new FileIO();
 		setDatasets();// 초기데이터 셋팅 : 기능 구현 후 삭제
 		getDatasets();// 입력(데이터 불러오기)
@@ -41,26 +41,21 @@ public class CinemaSystem {
 			firstDisplayPrint();
 			switch(getInputValue()) {
 				case 1:{//1.회원 로그인 / 회원예매하기
-					if(!isLoggedIn) {
-						if( (userLoggedIn = login()) != null);{ //일반 회원이라면
-							if(!userLoggedIn.isAdmin()) {
-								ReservationProcess reservationProcess = new ReservationProcess(this);
-								reservationProcess.showReservationMenu(isLoggedIn);
-								isLoggedIn = !isLoggedIn;
-								userLoggedIn = null;
-							} else { //관리자라면	
-								 AdminOs = new AdminOS(this);
-								 AdminOs.run();
-								 isLoggedIn = !isLoggedIn;
-								 userLoggedIn = null;
-							}
-							break;
-						} //일반회원이라면 
-					} else {
+					userLoggedIn = login();
+					if(userLoggedIn == null) break;
+					if(!userLoggedIn.isAdmin()) {
 						ReservationProcess reservationProcess = new ReservationProcess(this);
 						reservationProcess.showReservationMenu(isLoggedIn);
+						isLoggedIn = !isLoggedIn;
+						userLoggedIn = null;
+					} else { //관리자라면	
+						 AdminOs = new AdminOS(this);
+						 AdminOs.run();
+						 isLoggedIn = !isLoggedIn;
+						 userLoggedIn = null;
 					}
 					break;
+					
 				} //로그인
 				case 2:{//2.비회원으로 예매
 					ReservationProcess reservationProcess = new ReservationProcess(this);
@@ -87,8 +82,8 @@ public class CinemaSystem {
 		// default 데이터
 		this.theaters.add(new Theater("스즈메", new int[] {3,4}, true));
 		this.theaters.add(new Theater("존윅", new int[] {10,10}, false));
-		this.members.add(new Member(0101234123, "1234", "oshh","오승환", true));
-		this.members.add(new Member(0101234567, "5678", "sjsj","장석진"));
+		this.members.add(new Member("010-1234-123", "1234", "oshh","오승환", true));
+		this.members.add(new Member("010-123-4567", "5678", "sjsj","장석진"));
 		Theater theater1 = (Theater) this.theaters.get(0);
 		Theater theater2 = (Theater) this.theaters.get(1);
 		User user1 = (User) this.members.get(0);
@@ -175,7 +170,7 @@ public class CinemaSystem {
 		System.out.println("회원이름을 입력하세요");
 		String userName = getStringValue();
 		System.out.println("핸드폰번호를 입력하세요");
-		int userPhoneNumber = getInputValue();
+		String userPhoneNumber = getStringValue();
 		members.add(new Member(userPhoneNumber, userPassword, userId, userName));
 		System.out.println("회원가입이 완료되었습니다.");
 		System.out.println("가입정보 : ");
