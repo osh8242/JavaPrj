@@ -275,7 +275,7 @@ public class AdminOS {
 	private void saveDatasetMenu() {
 		int selectedNum;
 		System.out.println("저장할 데이터 선택 :");
-		System.out.println("[1.영화-상영관 정보 저장]\t[2.예약내역 저장]\t[3.회원정보 저장]\t[4. 모든 데이터 저장]");
+		System.out.println("[1.영화-상영관 정보 저장]\t[2.예약내역 저장]\t[3.회원정보 저장]\t[4.모든 데이터 저장]");
 		System.out.print("입력> ");
 
 		outer: while (true) {
@@ -286,11 +286,11 @@ public class AdminOS {
 				break outer;
 			case 2:
 				System.out.println("예약내역를 저장합니다.");
-				cs.saveDatasets(cs.members, "Member");
+				cs.saveDatasets(cs.reservations, "Reservation");
 				break outer;
 			case 3:
 				System.out.println("회원정보를 저장합니다.");
-				cs.saveDatasets(cs.reservations, "Reservation");
+				cs.saveDatasets(cs.members, "Member");
 				break outer;
 			case 4:
 				System.out.println("모든 데이터를 저장합니다.");
