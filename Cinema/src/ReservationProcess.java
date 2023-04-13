@@ -95,7 +95,6 @@ public class ReservationProcess {
 			}
 
 		}
-
 		if (movieNum - 1 <= theaters.size()) {
 			System.out.println("선택하신 영화는 " + theaters.get(movieNum - 1).getMovie() + "입니다.");
 			for (int j = 0; j < theaters.get(movieNum - 1).getSeat().length; j++) {

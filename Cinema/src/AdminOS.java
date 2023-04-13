@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class AdminOS {
@@ -6,7 +8,8 @@ public class AdminOS {
 	public ArrayList<Theater> theaters;
 	public ArrayList<Reservation> reservations; 
 	public ArrayList<Member> members;
-	
+	private BufferedReader br;
+
 	public AdminOS(CinemaSystem cinemaSystem) {
 		this.cs = cinemaSystem;
 		this.theaters = cinemaSystem.theaters;
@@ -31,6 +34,10 @@ public class AdminOS {
 								break;
 							}
 							case 3:{ //돌아가기
+								addTheaters();
+								break;
+							}
+							case 0:{ //돌아가기
 								break outer1;
 							}
 						}
@@ -54,7 +61,8 @@ public class AdminOS {
 					break;
 				}
 				case 6:{ //파일저장
-					
+					saveDatasetMenu();
+					break;
 				}
 				case 0:{ //관리자모드 끝내기
 					break outerAdmin;
@@ -88,7 +96,7 @@ public class AdminOS {
 	
 	public void showTheaterMenu() {
 		System.out.println("상영관 관리 메뉴 선택 :");
-		System.out.println("[1.상영관 목록 조회]\t[2.상영관 수정] [3.뒤로가기]");
+		System.out.println("[1.상영관 목록 조회] [2.상영관 수정] [3.상영관 추가] [0.뒤로가기]");
 		System.out.print("입력> ");
 	}
 	
@@ -135,9 +143,56 @@ public class AdminOS {
 		}
 		
 	}
+
+	// 여기 수정중 
+	public void addTheaters() {
+		boolean runState = true;
+		int theaterNo = theaters.size()+1;
+		System.out.println(theaterNo + "번 상영관을 추가하시겠습니까? : [1.예]	[2.아니오]");
+		switch(cs.getInputValue()){
+			case 1:		
+				System.out.print("상영할 영화제목을 입력하세요 : ");
+				String title = cs.getStringValue();
+		
+				System.out.println("상영관의 좌석사이즈 입력하세요.");
+				System.out.print("> 행 : ");
+				int row = cs.getInputValue(); 
+				System.out.print("> 열 : ");
+				int col = cs.getInputValue(); 
+				
+				boolean isImax;
+				System.out.print("아이맥스 영화관입니까? : [1.예]	[2.아니오]\n");
+				outer_1 : while(true) {
+					switch(cs.getInputValue()){
+					case 1:
+						isImax = true;
+						break outer_1;
+					case 2:
+						isImax = false;
+						break outer_1;
+						default : 
+							System.out.println("올바른 값을 입력해 주세요.");
+					}
+				}
+				
+				Theater t = new Theater(title, new int[]{row, col}, isImax);
+				cs.theaters.add(t);
+				System.out.println(t.toString()); 
+				System.out.print("\n상영관이 추가되었습니다.\n");
+			case 2:
+				System.out.println("이전메뉴로 돌아갑니다.");
+
+		}
+		System.out.println();
+
+		
+		
+		
+		
+	}
 	
 	public void showMembers() {
-		for (Member m : members) {
+		for (Member m : this.members) {
 			System.out.println(m.toString());
 		}
 		System.out.println("총 회원수 : " + members.size());
@@ -221,5 +276,41 @@ public class AdminOS {
 			}			
 		}
 	} // editmember()
+	
+	private void saveDatasetMenu() {
+		int selectedNum;
+		System.out.println("저장할 데이터 선택 :");
+		System.out.println("[1.영화-상영관 정보 저장]\t[2.예약내역 저장]\t[3.회원정보 저장]\t[4. 모든 데이터 저장]");
+		System.out.print("입력> ");
+		
+		outer : while(true) {
+			switch(cs.getInputValue()) {
+			case 1: 
+				System.out.println("영화-상영관 정보를 저장합니다.");
+				cs.saveDatasets(cs.theaters, "Theater");
+				break outer;
+			case 2:
+				System.out.println("예약내역를 저장합니다.");
+				cs.saveDatasets(cs.members, "Member");
+				break outer;
+			case 3:
+				System.out.println("회원정보를 저장합니다.");
+				cs.saveDatasets(cs.reservations, "Reservation");
+				break outer;
+			case 4:
+				System.out.println("모든 데이터를 저장합니다.");
+				cs.saveDatasets(cs.theaters, "Theater");
+				cs.saveDatasets(cs.members, "Member");
+				cs.saveDatasets(cs.reservations, "Reservation");
+				break outer;
+				default:{
+					System.out.println("잘못된 값을 입력하셨습니다.");
+				}
+			}	
+		}
+		System.out.println();
+		
+	
+	}
 
 } //class

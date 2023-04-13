@@ -24,7 +24,7 @@ public class CinemaSystem {
 		this.theaters = new ArrayList<Theater>();
 		this.members = new ArrayList<Member>();
 		this.reservations = new ArrayList<Reservation>();
-		this.AdminOs = new AdminOS(this);
+//		this.AdminOs = new AdminOS(this);
 		
 		this.fileIO = new FileIO();
 		setDatasets();// 초기데이터 셋팅 : 기능 구현 후 삭제
@@ -38,6 +38,7 @@ public class CinemaSystem {
 
 	public void run() {
 		while(true) {
+
 			firstDisplayPrint();
 			switch(getInputValue()) {
 				case 1:{//1.회원 로그인 / 회원예매하기
@@ -60,6 +61,7 @@ public class CinemaSystem {
 						ReservationProcess reservationProcess = new ReservationProcess(this);
 						reservationProcess.showReservationMenu(isLoggedIn);
 					}
+
 					break;
 				} //로그인
 				case 2:{//2.비회원으로 예매
@@ -87,26 +89,28 @@ public class CinemaSystem {
 		// default 데이터
 		this.theaters.add(new Theater("스즈메", new int[] {3,4}, true));
 		this.theaters.add(new Theater("존윅", new int[] {10,10}, false));
-		this.members.add(new Member(0101234123, "1234", "oshh","오승환", true));
-		this.members.add(new Member(0101234567, "5678", "sjsj","장석진"));
+		this.members.add(new Member("0101234123", "1234", "oshh","오승환", true));
+		this.members.add(new Member("0101234567", "5678", "sjsj","장석진"));
 		Theater theater1 = (Theater) this.theaters.get(0);
 		Theater theater2 = (Theater) this.theaters.get(1);
 		User user1 = (User) this.members.get(0);
 		User user2 = (User) this.members.get(1);
-		this.reservations.add(new Reservation( user1, theater1, new int[]{3,4}));
-		this.reservations.add(new Reservation( user2, theater2, new int[]{1,1}));
+//		this.reservations.add(new Reservation( user1, theater1, new int[]{3,4}));
+//		this.reservations.add(new Reservation( user2, theater2, new int[]{1,1}));
         // 임시 데이터 파일로 저장(출력)
 		fileIO.saveDataset(this.theaters, "Theater");
 		fileIO.saveDataset(this.members, "Member");
 		fileIO.saveDataset(this.reservations, "Reservation");		
 	}
+
 	// 데이터 저장하는 함수
-	private void saveDatasets(ArrayList savingDataset, String fileName) {
-		System.out.println("데이터 파일을 저장중...");
+	public void saveDatasets(ArrayList savingDataset, String fileName) {
+		System.out.println(fileName + " 파일을 저장중...");
 		fileIO.saveDataset(savingDataset, fileName);
 		System.out.println("저장완료");
 	}
-	
+
+
 	private void getDatasets() {
 		System.out.println("데이터를 불러옵니다.");
 		// 입력(데이터 불러오기) 
@@ -139,7 +143,7 @@ public class CinemaSystem {
 	
 	public void firstDisplayPrint() {
 	System.out.println("메뉴 선택 :");
-	if(!isLoggedIn) System.out.println("[1.회원 로그인]\t[2.비회원으로 예매]\t[3.회원가입]");	
+	if(!isLoggedIn) System.out.println("[1.회원 로그인]   [2.비회원으로 예매]   [3.회원가입]");	
 	System.out.print("입력> ");
 	}
 	
@@ -175,7 +179,7 @@ public class CinemaSystem {
 		System.out.println("회원이름을 입력하세요");
 		String userName = getStringValue();
 		System.out.println("핸드폰번호를 입력하세요");
-		int userPhoneNumber = getInputValue();
+		String userPhoneNumber = getStringValue();
 		members.add(new Member(userPhoneNumber, userPassword, userId, userName));
 		System.out.println("회원가입이 완료되었습니다.");
 		System.out.println("가입정보 : ");
