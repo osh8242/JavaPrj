@@ -5,6 +5,7 @@ public class MainEntry {
 
 		CinemaSystem cs = new CinemaSystem();
 		cs.run();
+
 	}
 
 }
