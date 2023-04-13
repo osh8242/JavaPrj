@@ -1,6 +1,8 @@
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -11,17 +13,51 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class FileIO {
+	public CinemaSystem cs;
 
-//		String path = "D:\\JavaPrj\\IOtest\\"; // 승환
-		String path = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\"; // 나은
-//	    String path = "C:\\Team4\\IOtest"; // 석진
-//		String path = "C:\\Users\\KOSA\\TeamProject\\IOtest\\"; // 창현
+//	String path = "D:\\JavaPrj\\IOtest\\"; // 승환
+	String path = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\"; // 나은
+//	String path = "C:\\Team4\\IOtest"; // 석진
+//	String path = "C:\\Users\\KOSA\\TeamProject\\IOtest\\"; // 창현
 
+	public FileIO(CinemaSystem cinemaSystem) {
+		this.cs = cinemaSystem;
+	}
+	
+	// 초기 데이터 셋팅 함수
+	public void setDatasets() {
+		File file1 = new File(path+"Member.txt");
+		File file2 = new File(path+"Reservation.txt");
+		File file3 = new File(path+"Theater.txt");
+		
+		if(!file1.exists() || !file2.exists() || !file3.exists()) {
+			System.out.println("데이터 초기화 중 ...");
+			// default 데이터
+			cs.theaters.add(new Theater("스즈메", new int[] {3,4}, true));
+			cs.theaters.add(new Theater("존윅", new int[] {10,10}, false));
+			cs.members.add(new Member("010-1234-123", "1234", "oshh","오승환", true));
+			cs.members.add(new Member("010-123-4567", "5678", "sjsj","장석진"));
+
+			Theater theater1 = (Theater) cs.theaters.get(0);
+			Theater theater2 = (Theater) cs.theaters.get(1);
+			User user1 = (User) cs.members.get(0);
+			User user2 = (User) cs.members.get(1);
+			//cs.reservations.add(new Reservation( user1, theater1, new int[]{3,4}));
+			//cs.reservations.add(new Reservation( user2, theater2, new int[]{1,1}));
+			
+			// 임시 데이터 파일로 저장
+			saveDataset(cs.theaters, "Theater");
+			saveDataset(cs.members, "Member");
+			saveDataset(cs.reservations, "Reservation");
+		}
+	}
+	
+		
 	// 데이터 불러오기 함수
 	public ArrayList loadDataset(String fileName) {
 
 		String filePath = path + fileName + ".txt";
-		System.out.println("불러오기 경로 : " + filePath);
+		System.out.println(" 경로: " + filePath);
 		FileInputStream fis = null;
 		BufferedInputStream bis = null;
 		ObjectInputStream in = null;
@@ -39,7 +75,8 @@ public class FileIO {
 		} catch (FileNotFoundException e) { // FileNotFoundException
 			System.out.println("파일이 존재 않습니다.");
 		} catch (EOFException e) {
-			System.out.println("끝 " + e.getMessage());
+			String msg = (e.getMessage() == null)? "파일을 모두 불러왔습니다.":"에러";
+			System.out.println("... "+ msg);
 		} catch (IOException e3) {
 			e3.printStackTrace();
 			System.out.println(fileName + "파일을 읽을 수 없습니다.");
