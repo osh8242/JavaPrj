@@ -1,20 +1,14 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ReservationProcess {
 
-    private CinemaSystem cinemaSystem;
-    private Member member;
-    public ArrayList<Theater> theaters;
-    private ArrayList<Reservation> reservations;
-    public Guest guest;
-    public Validation validation = new Validation();
+    private CinemaSystem cs;
+    private Guest guest;
+    private Validation validation = new Validation();
 
-    public ReservationProcess(CinemaSystem cinemaSystem) {
-        this.cinemaSystem = cinemaSystem;
-        this.member = cinemaSystem.userLoggedIn;
-        this.theaters = cinemaSystem.theaters;
-        this.reservations = cinemaSystem.reservations;
+
+    public ReservationProcess(CinemaSystem cs) {
+        this.cs = cs;
     }
 
     public void showReservationMenu(boolean isLoggedIn) {
@@ -29,7 +23,7 @@ public class ReservationProcess {
             System.out.println("5. 적립포인트 확인");
         }
 
-        switch (cinemaSystem.getInputValue())
+        switch (cs.getInputValue())
 
         {
             case 0:
@@ -60,27 +54,27 @@ public class ReservationProcess {
     }
 
     private void showMovieList() {
-        for (int i = 0; i < theaters.size(); i++) {
-            System.out.println("영화제목 : " + theaters.get(i).getMovie() + ", 영화가격 : " + theaters.get(i).getPrice());
+        for (int i = 0; i < cs.theaters.size(); i++) {
+            System.out.println("상영관 : "  +  (i + 1) + "관, 영화제목 : " + cs.theaters.get(i).getMovie() + ", 영화가격 : " + cs.theaters.get(i).getPrice());
         }
     }
 
     private void createReservation(boolean isLoggedIn) {
         System.out.println("현재 상영중인 영화입니다.");
         System.out.println();
-        for (int i = 0; i < theaters.size(); i++) {
-            System.out.println("[" + (i + 1) + "] 영화제목 : " + theaters.get(i).getMovie() + ", 영화가격 : "
-                    + theaters.get(i).getPrice());
+        for (int i = 0; i < cs.theaters.size(); i++) {
+            System.out.println("[" + (i + 1) + "] 영화제목 : " + cs.theaters.get(i).getMovie() + ", 영화가격 : "
+                    + cs.theaters.get(i).getPrice());
         }
         System.out.println("예매하실 영화의 번호를 입력하세요.");
-        int movieNum = cinemaSystem.getInputValue();
+        int movieNum = cs.getInputValue();
         while (!isLoggedIn) {
             System.out.println("[비회원용] 설정하실 비밀번호를 입력해주세요.(숫자 6자리)");
-            String password = cinemaSystem.getStringValue();
+            String password = cs.getStringValue();
 
             if (validation.isValidGuestPassword(password)) {
                 System.out.println("[비회원용] 설정하실 비밀번호를 한번 더 입력해주세요.");
-                String password2 = cinemaSystem.getStringValue();
+                String password2 = cs.getStringValue();
 
                 if (!password.equals(password2)) {
                     System.out.println("[비회원용] 비밀번호가 다릅니다.");
@@ -98,18 +92,18 @@ public class ReservationProcess {
 
         }
 
-        if (movieNum - 1 <= theaters.size()) {
-            System.out.println("선택하신 영화는 " + theaters.get(movieNum - 1).getMovie() + "입니다.");
-            for (int j = 0; j < theaters.get(movieNum - 1).getSeat().length; j++) {
-                for (int k = 0; k < theaters.get(movieNum - 1).getSeat()[j].length; k++) {
+        if (movieNum - 1 <= cs.theaters.size()) {
+            System.out.println("선택하신 영화는 " + cs.theaters.get(movieNum - 1).getMovie() + "입니다.");
+            for (int j = 0; j < cs.theaters.get(movieNum - 1).getSeat().length; j++) {
+                for (int k = 0; k < cs.theaters.get(movieNum - 1).getSeat()[j].length; k++) {
                     int[] seat = new int[] { j + 1, k + 1 };
 
                     // 예약되지 않은 좌석 판별
                     boolean isReserved = false;
-                    if (reservations != null) {
+                    if (cs.reservations != null) {
 
-                        for (Reservation reservation : reservations) {
-                            if (reservation.getTheater().getMovie().equals(theaters.get(movieNum - 1).getMovie())
+                        for (Reservation reservation : cs.reservations) {
+                            if (reservation.getTheater().getMovie().equals(cs.theaters.get(movieNum - 1).getMovie())
                                     && Arrays.equals(reservation.getSeat(), seat)) {
                                 isReserved = true;
                                 break;
@@ -120,8 +114,6 @@ public class ReservationProcess {
                         } else {
                             System.out.printf("[%d-%d]", seat[0], seat[1]);
                         }
-                    } else {
-                        System.out.printf("[%d-%d]", seat[0], seat[1]);
                     }
                 }
                 System.out.println();
@@ -129,42 +121,39 @@ public class ReservationProcess {
             System.out.println("예매하실 좌석을 선택해주세요.");
             System.out.println("입력예시) 1-1");
 
-            String seat = cinemaSystem.getStringValue();
+            String seat = cs.getStringValue();
             String[] inputStrValue = seat.split("-");
             int[] inputIntValue = new int[] { Integer.parseInt(inputStrValue[0]), Integer.parseInt(inputStrValue[1]) };
 
             boolean isSeatAvailable = true;
 
-            if(reservations != null) {
-
-
-            for (Reservation reservation : reservations) {
-                if (reservation.getTheater().getMovie().equals(theaters.get(movieNum - 1).getMovie())
+            for (Reservation reservation : cs.reservations) {
+                if (reservation.getTheater().getMovie().equals(cs.theaters.get(movieNum - 1).getMovie())
                         && Arrays.equals(reservation.getSeat(), inputIntValue)) {
                     System.out.println("해당 좌석은 예매가 불가능합니다");
                     isSeatAvailable = false;
                     break;
                 }
             }
-            }
 
             if (isSeatAvailable) {
                 if (isLoggedIn) {
-                    Reservation arr = new Reservation(member, theaters.get(movieNum - 1), inputIntValue);
-                    cinemaSystem.reservations.add(arr);
-                    member.setUserPoint(member.getUserPoint() + (int) (theaters.get(movieNum - 1).getPrice() * 0.1));
+                    Reservation arr = new Reservation(cs.userLoggedIn, cs.theaters.get(movieNum - 1), inputIntValue);
+                    cs.reservations.add(arr);
+                    cs.userLoggedIn.setUserPoint(
+                            cs.userLoggedIn.getUserPoint() + (int) (cs.theaters.get(movieNum - 1).getPrice() * 0.1));
                     System.out.println("예매가 완료되었습니다.");
                     System.out.println("고객님의 예약번호는 "
-                            + cinemaSystem.reservations.get(reservations.size() - 1).getReservationNo() + "입니다.");
-                    System.out.println("적립된 포인트는 " + (int) (theaters.get(movieNum - 1).getPrice() * 0.1) + ", 총 포인트는 "
-                            + member.getUserPoint() + " 입니다.");
+                            + cs.reservations.get(cs.reservations.size() - 1).getReservationNo() + "입니다.");
+                    System.out.println("적립된 포인트는 " + (int) (cs.theaters.get(movieNum - 1).getPrice() * 0.1) + ", 총 포인트는 "
+                            + cs.userLoggedIn.getUserPoint() + " 입니다.");
                 }
                 if (!isLoggedIn) {
-                    Reservation arr = new Reservation(guest, theaters.get(movieNum - 1), inputIntValue);
-                    cinemaSystem.reservations.add(arr);
+                    Reservation arr = new Reservation(guest, cs.theaters.get(movieNum - 1), inputIntValue);
+                    cs.reservations.add(arr);
                     System.out.println("예매가 완료되었습니다.");
                     System.out.println("고객님의 예약번호는 "
-                            + cinemaSystem.reservations.get(reservations.size() - 1).getReservationNo() + "입니다.");
+                            + cs.reservations.get(cs.reservations.size() - 1).getReservationNo() + "입니다.");
                 }
             }
         } else {
@@ -175,13 +164,13 @@ public class ReservationProcess {
     private void confirmReservation() {
 
         System.out.println("예약번호를 입력해주세요.");
-        String reservationNo = cinemaSystem.getStringValue();
+        String reservationNo = cs.getStringValue();
         boolean match = false;
-        for (int i = 0; i < reservations.size(); i++) {
-            if (reservationNo.equals(cinemaSystem.reservations.get(i).getReservationNo())) {
-                System.out.println("예매하신 영화는 " + cinemaSystem.reservations.get(i).getTheater().getMovie() + "입니다.");
-                System.out.println("좌석은 [" + cinemaSystem.reservations.get(i).getSeat()[0] + " - "
-                        + cinemaSystem.reservations.get(i).getSeat()[1] + "] 입니다.");
+        for (int i = 0; i < cs.reservations.size(); i++) {
+            if (reservationNo.equals(cs.reservations.get(i).getReservationNo())) {
+                System.out.println("예매하신 영화는 " + cs.reservations.get(i).getTheater().getMovie() + "입니다.");
+                System.out.println("좌석은 [" + cs.reservations.get(i).getSeat()[0] + " - "
+                        + cs.reservations.get(i).getSeat()[1] + "] 입니다.");
                 match = true;
                 break;
             }
@@ -194,18 +183,18 @@ public class ReservationProcess {
     private void cancelReservation(boolean isLoggedIn) {
 
         System.out.println("예약번호를 입력해주세요.");
-        String reservationNo = cinemaSystem.getStringValue();
+        String reservationNo = cs.getStringValue();
         boolean bb = false;
-        for (int i = 0; i < cinemaSystem.reservations.size(); i++) {
-            if (reservationNo.equals(cinemaSystem.reservations.get(i).getReservationNo())) {
+        for (int i = 0; i < cs.reservations.size(); i++) {
+            if (reservationNo.equals(cs.reservations.get(i).getReservationNo())) {
                 System.out.println("예약을 취소하시려면 비밀번호를 입력해주세요.");
-                String password = cinemaSystem.getStringValue();
+                String password = cs.getStringValue();
                 bb = true;
                 if (isLoggedIn) {
-                    if (password.equals(member.getUserPassword())) {
-                        member.setUserPoint(member.getUserPoint()
-                                - (int) (cinemaSystem.reservations.get(i).getTheater().getPrice() * 0.1));
-                        cinemaSystem.reservations.remove(i);
+                    if (password.equals(cs.userLoggedIn.getUserPassword())) {
+                        cs.userLoggedIn.setUserPoint(cs.userLoggedIn.getUserPoint()
+                                - (int) (cs.reservations.get(i).getTheater().getPrice() * 0.1));
+                        cs.reservations.remove(i);
 
                         System.out.println("예매가 취소되었습니다.");
                     } else {
@@ -213,8 +202,8 @@ public class ReservationProcess {
                     }
                 }
                 if (!isLoggedIn) {
-                    if (password.equals(reservations.get(i).getUser().getUserPassword())) {
-                        cinemaSystem.reservations.remove(i);
+                    if (password.equals(cs.reservations.get(i).getUser().getUserPassword())) {
+                        cs.reservations.remove(i);
                         System.out.println("예매가 취소되었습니다.");
                     } else {
                         System.out.println("비밀번호가 틀렸습니다.");
@@ -226,11 +215,11 @@ public class ReservationProcess {
         if (!bb) {
             System.out.println("예매하신 내역이 없습니다. 예약번호를 확인해주세요.");
         }
-
     }
 
     private void showUserPoint() {
-        System.out.println("현재 포인트는 " + member.getUserPoint() + "입니다.");
+        System.out.println("현재 포인트는 " + cs.userLoggedIn.getUserPoint() + "입니다.");
     }
+
 
 }

@@ -1,6 +1,5 @@
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,8 +41,10 @@ public class FileIO {
 			Theater theater2 = (Theater) cs.theaters.get(1);
 			User user1 = (User) cs.members.get(0);
 			User user2 = (User) cs.members.get(1);
+
+			cs.reservations.add(new Reservation( user1, theater1, new int[]{3,4}));
 			cs.reservations.add(new Reservation( user2, theater2, new int[]{1,1}));
-			cs.reservations.add(new Reservation( user2, theater1, new int[]{1,1}));
+			
 
 			// 임시 데이터 파일로 저장
 			saveDataset(cs.theaters, "Theater");
