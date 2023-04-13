@@ -12,14 +12,14 @@ public class MainEntry {
 //		cs.setReservations(null);
 		
 		// nana test code //////////////////////////////
-
+/**
 		List<Serializable> theaterList = new ArrayList<Serializable>();
 		theaterList.add(new Theater("스즈메", new int[] {3,4}, true));
         theaterList.add(new Theater("존윅", new int[] {10,10}, false));
-//        // 출력
+        // 출력(데이터 내보내기)
 		FileIO fio = new FileIO();
 		fio.Output(theaterList, "Theater");
-		// 입력 
+		// 입력(데이터 불러오기) 
 		theaterList = fio.Input( "Theater");
 		System.out.println(theaterList.get(0));//.toString());
 
@@ -48,6 +48,7 @@ public class MainEntry {
 		reservationList = fio.Input( "Theater");
 		System.out.println(reservationList.get(0));
 		
+ */
 		///////////////////////////////////////////////
 		
 		 cs.run();
