@@ -12,8 +12,9 @@ public class CinemaSystem {
 	public ArrayList<Member> members;
 	private FileIO fileIO;
 	private BufferedReader br;	
-	private Member userLoggedIn;
-	private AdminOS AdminOs = new AdminOS(this);
+	public Member userLoggedIn;
+	private AdminOS AdminOs;
+
 	
 	
 
@@ -21,7 +22,7 @@ public class CinemaSystem {
 	public CinemaSystem() {
 
 		this.isLoggedIn = false;
-		this.reservationProcess = new ReservationProcess();
+		this.reservationProcess = new ReservationProcess(this);
 		
 		this.theaters = new ArrayList<Theater>();
 		this.members = new ArrayList<Member>();
@@ -40,7 +41,9 @@ public class CinemaSystem {
 	public void run() {		
 		
 		while(true) {
-			firstDisplayPrint();			
+
+			firstDisplayPrint();
+
 			switch(getInputValue()) {
 				case 1:{//1.회원 로그인
 					if( (userLoggedIn = login()) != null);{ //일반 회원이라면
