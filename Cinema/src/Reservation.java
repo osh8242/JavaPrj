@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 
 public class Reservation implements Serializable {
-	private static int count = 0;
+	private static int count;
 	private String reservationNo;
 	private User user;
 	private Theater theater;
@@ -21,7 +21,14 @@ public class Reservation implements Serializable {
 		this.user = user;
 		this.theater = theater;
 		this.seat = seat;
+	}		
 
+	public static int getCount() {
+		return count;
+	}
+
+	public static void setCount(int count) {
+		Reservation.count = count;
 	}
 
 	public String getReservationNo() {

@@ -96,6 +96,7 @@ public class AdminOS {
         for (int i = 0; i < cs.theaters.size(); i++) {
             System.out.println(i + 1 + "번 상영관");
             System.out.println(cs.theaters.get(i).toString() + "\n");
+            cs.theaters.get(i).showSeat();
         }
     }
 
@@ -201,11 +202,18 @@ public class AdminOS {
             System.out.println("수정하고자 하는 내용을 선택하세요");
             System.out.println("[1.유저아이디] [2.비밀번호] [3.핸드폰번호] [4.회원이름] [5.적립포인트] [6.관리자권한]");
             System.out.println("[0. 뒤로가기]");
-            switch (cs.getInputValue()) {
+            outers:switch (cs.getInputValue()) {
                 case 1: { // 유저아이디
                     System.out.println("현재 유저의 아이디는 : " + member.getUserId());
                     System.out.println("수정할 값을 입력하세요");
-                    member.setUserId(cs.getStringValue());
+                    String temp = cs.getStringValue();
+                    for(Member m : cs.members) {
+                    	if(temp.equals(m.getUserId())) {
+                    		System.out.println("이미 아이디가 사용중입니다.");
+                    		break outers;
+                    	}
+                    }
+                    member.setUserId(temp);                    
                     System.out.println("수정된 유저의 아이디는 : " + member.getUserId());
                     continue;
                 }
