@@ -1,5 +1,3 @@
-import java.io.Serializable;
-
 
 public class Member extends User {
 	
@@ -10,16 +8,15 @@ public class Member extends User {
 	private boolean isAdmin;
 	
 	// 일반 회원 생성자함수
-	public Member(int userPhoneNumber, String userPassword, String userId, String userName) {
-		super( userPassword);
-		this.userId = userId;
-		this.userName = userName;
+	public Member(String userPhoneNumber, String userPassword, String userId, String userName) {
+		this(userPhoneNumber, userPassword, userId, userName, false);
 		this.userPoint = 0;
 		this.isAdmin = false;
 	}
 	// 관리자 생성자함수
-	public Member(int userPhoneNumber, String userPassword, String userId, String userName, boolean isAdmin) {
-		super( userPassword);
+	public Member(String userPhoneNumber, String userPassword, String userId, String userName, boolean isAdmin) {
+		super(userPassword);
+		this.userPhoneNumber = userPhoneNumber;
 		this.userId = userId;
 		this.userName = userName;
 		this.userPoint = -10000;
@@ -64,17 +61,4 @@ public class Member extends User {
 		return "Member [userPhoneNumber: " + userPhoneNumber + ", userId: " + userId + ", userName: " + userName
 				+ ", userPoint: " + userPoint + ", isAdmin: " + isAdmin + "]";
 	}
-//	@Override
-//	public String getClassName() {
-//		return "Member";
-//	}
-	
-	
-
-	
-	
-	
-
-	
-
 }
