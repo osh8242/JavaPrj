@@ -50,8 +50,9 @@ public class CinemaSystem {
 						if(!userLoggedIn.isAdmin()) {
 							//ReservationProcess reservationProcess = new ReservationProcess(this);
 							//ReservationProcess.showReservationMenu(isLoggedIn, userLoggedIn);	
-						} else { //관리자라면				 			
-							 AdminOs.run();
+						} else { //관리자라면			
+							AdminOs = new AdminOS(this);
+							AdminOs.run();
 						}
 					} //일반회원이라면 
 					break;
