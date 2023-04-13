@@ -1,6 +1,9 @@
+import java.io.Serializable;
+
 
 public class Member extends User {
 	private String userPhoneNumber;
+
 	private String userId;
 	private String userName;
 	private int userPoint;
@@ -28,7 +31,9 @@ public class Member extends User {
 	public void setUserPhoneNumber(String userPhoneNumber) {
 		this.userPhoneNumber = userPhoneNumber;
 	}
+
 	public String getUserId() {
+
 		return userId;
 	}
 	public void setUserId(String userId) {
@@ -46,17 +51,23 @@ public class Member extends User {
 	public void setUserPoint(int userPoint) {
 		this.userPoint = userPoint;
 	}
+
 	public boolean isAdmin() {
 		return isAdmin;		
 	}	
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+
 	@Override
 	public String toString() {
 		return "Member [userPhoneNumber: " + userPhoneNumber + ", userId: " + userId + ", userName: " + userName
 				+ ", userPoint: " + userPoint + ", isAdmin: " + isAdmin + "]";
 	}
+//	@Override
+//	public String getClassName() {
+//		return "Member";
+//	}
 	
 	
 

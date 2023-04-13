@@ -1,5 +1,7 @@
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Calendar;
+
 
 public class Reservation {
 	private static int count = 0;
@@ -50,6 +52,10 @@ public class Reservation {
 		return "Reservation [reservationNo : " + reservationNo + ", user : " + user + ", theater : " + theater + ", seat : "
 				+ Arrays.toString(seat) + "]";
 	}
+//	@Override
+//	public String getClassName() {
+//		return "Reservation";
+//	}
 	
 	
 }
