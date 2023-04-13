@@ -157,7 +157,6 @@ public class ReservationProcess {
                   cinemaSystem.reservations.add(arr);
                   System.out.println("예매가 완료되었습니다.");
                   System.out.println("고객님의 예약번호는 " + cinemaSystem.reservations.get(reservations.size()-1).getReservationNo() + "입니다.");
-                  System.out.println(cinemaSystem.reservations.get(i).count);
                   break;
                }
             }
