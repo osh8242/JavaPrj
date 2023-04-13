@@ -15,11 +15,11 @@ public class AdminOS {
 	}
 	
 	public void run() {
-		outer:while(true) {
+		outerAdmin:while(true) {
 			showAdminMenu();
 			switch(cs.getInputValue()) {
 				case 1:{ //상영관 관리
-					while(true) {
+					outer:while(true) {
 						showTheaterMenu();
 						switch(cs.getInputValue()) {
 							case 1:{ //상영관 정보 조회
@@ -35,6 +35,7 @@ public class AdminOS {
 							}
 						}
 					}
+					break;
 					
 				}
 				case 2:{ //회원목록 조회
@@ -57,17 +58,13 @@ public class AdminOS {
 					
 				}
 				case 0:{ //관리자모드 끝내기
-					break;
+					break outerAdmin;
 				}
 		
 			} // showAdminMenu switch
 		} // showAdminMenu while
 		
 	} //run()
-
-
-
-
 
 	public void showRevenue() {
 		int revenueSum = 0;
@@ -105,39 +102,37 @@ public class AdminOS {
 	
 	public void editTheaters() {
 		boolean runState = true;
-		while(runState) {
-			System.out.println("수정할 상영관 번호를 입력하세요");
-			Theater t = theaters.get(cs.getInputValue()+1);
-			System.out.println("선택된 상영관의 정보");
-			System.out.println(t.toString());
-			System.out.println("수정할 내용을 선택하세요.");
-			System.out.println("[1.영화] [2.티켓가격] [3.수정종료]");
-			switch(cs.getInputValue()) {
-				case 1:{
-					System.out.println("현재 영화제목 : "+t.getMovie());
-					System.out.print("수정할 영화제목을 입력하세요 : ");
-					t.setMovie(cs.getStringValue());
-					System.out.println("\n정보가 수정되었습니다.");
-					System.out.println("수정된 영화제목 : "+t.getMovie());
-					break;
-				}
-				case 2:{
-					System.out.println("현재 티켓가격 : "+t.getPrice());
-					System.out.print("수정할 티켓가격을 입력하세요 : ");
-					t.setMovie(cs.getStringValue());
-					System.out.println("\n정보가 수정되었습니다.");
-					System.out.println("수정된 티켓가격 : "+t.getPrice());
-					break;
-				}
-				case 3:{
-					runState = false;
-					break;
-				}
-				default:{
-					System.out.println("잘못된 값을 입력하셨습니다.");
-				}
-			
+		System.out.println("수정할 상영관 번호를 입력하세요");
+		Theater t = theaters.get(cs.getInputValue()-1);
+		System.out.println("선택된 상영관의 정보");
+		System.out.println(t.toString());
+		System.out.println("수정할 내용을 선택하세요.");
+		System.out.println("[1.영화] [2.티켓가격] [3.수정종료]");
+		switch(cs.getInputValue()) {
+			case 1:{
+				System.out.println("현재 영화제목 : "+t.getMovie());
+				System.out.print("수정할 영화제목을 입력하세요 : ");
+				t.setMovie(cs.getStringValue());
+				System.out.println("\n정보가 수정되었습니다.");
+				System.out.println("수정된 영화제목 : "+t.getMovie());
+				break;
 			}
+			case 2:{
+				System.out.println("현재 티켓가격 : "+t.getPrice());
+				System.out.print("수정할 티켓가격을 입력하세요 : ");
+				t.setMovie(cs.getStringValue());
+				System.out.println("\n정보가 수정되었습니다.");
+				System.out.println("수정된 티켓가격 : "+t.getPrice());
+				break;
+			}
+			case 3:{
+				runState = false;
+				break;
+			}
+			default:{
+				System.out.println("잘못된 값을 입력하셨습니다.");
+			}
+		
 		}
 		
 	}
@@ -154,7 +149,7 @@ public class AdminOS {
 		System.out.print("입력>>");
 		String name = cs.getStringValue();			
 		for(Member m : members) {
-			if (m.getUserName().equals(name)) {
+			if (m.getUserId().equals(name)) {
 				member = m;
 				break;
 			}
