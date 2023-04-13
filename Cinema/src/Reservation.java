@@ -1,25 +1,32 @@
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Calendar;
 
-public class Reservation implements Serializable{ 
 
-	private int reservationNo;
+public class Reservation {
+	private static int count = 0;
+	private String reservationNo;
 	private User user;
 	private Theater theater;
 	private int[] seat;
 	
+	public String createReservationNo() {
+		Calendar now = Calendar.getInstance();		
+		return now.get(Calendar.YEAR)+""+(now.get(Calendar.MONTH)+1)+""+now.get(Calendar.DAY_OF_MONTH)+"-"+count;
+	}
 	
-	
-	public Reservation(int reservationNo, User user, Theater theater, int[] seat) {
-		this.reservationNo = reservationNo;
+	public Reservation(User user, Theater theater, int[] seat) {
+		Reservation.count++;
+		this.reservationNo = createReservationNo();
 		this.user = user;
 		this.theater = theater;
 		this.seat = seat;
+		
 	}
-	public int getReservationNo() {
+	public String getReservationNo() {
 		return reservationNo;
 	}
-	public void setReservationNo(int reservationNo) {
+	public void setReservationNo(String reservationNo) {
 		this.reservationNo = reservationNo;
 	}
 	public User getUser() {

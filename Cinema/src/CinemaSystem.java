@@ -24,21 +24,27 @@ outerMain: while(true) {
 							//ReservationProcess reservationProcess = new ReservationProcess();
 							//ReservationProcess.showReservationMenu(isLoggedIn, userLoggedIn);	
 						} else { //관리자라면				 			
-					outerAdmin: while(true) {
+							 while(true) {
 									showAdminMenu();
 									switch(getInputValue()) {
 										case 1:{ //상영관 관리
-											showAdminMenu();
-											outerMovieInfo:switch(getInputValue()) {
-												case 1:{ //상영관 정보 조회
-													showTheaters();
-													break outerMovieInfo;
-												}
-												case 2:{ //상영관 정보 수정
-													editTheaters();
-													break;
+											while(true) {
+												showAdminMenu();
+												switch(getInputValue()) {
+													case 1:{ //상영관 정보 조회
+														showTheaters();
+														break;
+													}
+													case 2:{ //상영관 정보 수정
+														editTheaters();
+														break;
+													}
+													case 0:{
+														
+													}
 												}
 											}
+											
 										}
 										case 2:{ //회원목록 조회
 											showMembers();
@@ -255,7 +261,7 @@ outerMain: while(true) {
 				case 3:{ //핸드폰번호
 					System.out.println("현재 유저의 핸드폰번호는 : "+member.getUserPhoneNumber());
 					System.out.println("수정할 값을 입력하세요");
-					member.setUserPhoneNumber(getInputValue());
+					member.setUserPhoneNumber(getStringValue());
 					System.out.println("수정된 유저의 비밀번호는 : "+member.getUserPhoneNumber());
 					continue;
 				}

@@ -1,7 +1,9 @@
 import java.io.Serializable;
 
-public class Member extends User implements Serializable { 
-	private int userPhoneNumber;
+
+public class Member extends User {
+	private String userPhoneNumber;
+
 	private String userId;
 	private String userName;
 	private int userPoint;
@@ -23,10 +25,10 @@ public class Member extends User implements Serializable {
 		this.userPoint = -10000;
 		this.isAdmin = isAdmin;
 	}	
-	public int getUserPhoneNumber() {
+	public String getUserPhoneNumber() {
 		return userPhoneNumber;
 	}
-	public void setUserPhoneNumber(int userPhoneNumber) {
+	public void setUserPhoneNumber(String userPhoneNumber) {
 		this.userPhoneNumber = userPhoneNumber;
 	}
 
