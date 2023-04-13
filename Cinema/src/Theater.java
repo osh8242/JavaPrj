@@ -1,37 +1,40 @@
 import java.io.Serializable;
 import java.util.Arrays;
 
-public class Theater implements Serializable{ 
+public class Theater implements Serializable {
 	private String movie;
 	private String[][] seat;
 	private boolean isImax;
 	private int price;
-	
-	public Theater(String movie, int[] seatSize, boolean isImax) { 
+
+	public Theater(String movie, int[] seatSize, boolean isImax) {
 		// Parameter int[] seatSize는 (5,6)으로 받음 : 5행 6열 짜리 상영관을 의미.
 		this.movie = movie;
 		this.seat = new String[seatSize[0]][seatSize[1]];
 		// 좌석 배열 초기화
-		for(int i=0; i < seatSize[0]; i++) {
-			for(int j = 0; j<seatSize[1]; j++) {
-				seat[i][j] = "[" +(i+1)+"-"+(j+1)+"]";
-				//System.out.printf(seat[i][j]);
+		for (int i = 0; i < seatSize[0]; i++) {
+			for (int j = 0; j < seatSize[1]; j++) {
+				seat[i][j] = "[" + (i + 1) + "-" + (j + 1) + "]";
+				// System.out.printf(seat[i][j]);
 			}
-			//System.out.println();
+			// System.out.println();
 		}
 		this.isImax = isImax;
-		this.price = (isImax) ? 25000:15000;
+		this.price = (isImax) ? 25000 : 15000;
 	}
-	
+
 	public String getMovie() {
 		return movie;
-	} 
+	}
+
 	public void setMovie(String movie) {
 		this.movie = movie;
 	}
+
 	public String[][] getSeat() {
 		return seat;
 	}
+
 	// 상영관 좌석을 변경하려면 상영관 새로 생성
 //	public void setSeat(String[][] seat) {
 //		this.seat = seat;
@@ -39,10 +42,11 @@ public class Theater implements Serializable{
 	public boolean getIsImax() {
 		return isImax;
 	}
-	
+
 	public int getPrice() {
 		return price;
 	}
+
 	public void setPrice(int price) {
 		this.price = price;
 	}
@@ -51,21 +55,18 @@ public class Theater implements Serializable{
 	public String toString() {
 		return "Theater [movie: " + movie + ", seat: " + ", isImax: " + isImax + ", price: " + price + "]";
 	}
-	
+
 	public void showSeat() {
-		for(int i=0; i < seat.length; i++) {
-			for(String seatState:seat[i]) {
-				System.out.printf("[%s]",seatState);
+		for (int i = 0; i < seat.length; i++) {
+			for (String seatState : seat[i]) {
+				System.out.printf("[%s]", seatState);
 			}
 			System.out.println();
 		}
 	}
 
-
 	public String getClassName() {
 		return "Theater";
 	}
-	
-	
-	
+
 }

@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.regex.Pattern;
 
 public class ReservationProcess {
+
 	private CinemaSystem cinemaSystem;
 	private Member member;
 	public ArrayList<Theater> theaters;
@@ -66,20 +66,18 @@ public class ReservationProcess {
 	}
 
 	private void createReservation(boolean isLoggedIn) {
-
 		System.out.println("현재 상영중인 영화입니다.");
 		System.out.println();
 		for (int i = 0; i < theaters.size(); i++) {
 			System.out.println("[" + (i + 1) + "] 영화제목 : " + theaters.get(i).getMovie() + ", 영화가격 : "
 					+ theaters.get(i).getPrice());
 		}
-
 		System.out.println("예매하실 영화의 번호를 입력하세요.");
 		int movieNum = cinemaSystem.getInputValue();
 		while (!isLoggedIn) {
 			System.out.println("[비회원용] 설정하실 비밀번호를 입력해주세요.(숫자 6자리)");
 			String password = cinemaSystem.getStringValue();
-			
+
 			if (validation.isValidGuestPassword(password)) {
 				System.out.println("[비회원용] 설정하실 비밀번호를 한번 더 입력해주세요.");
 				String password2 = cinemaSystem.getStringValue();
