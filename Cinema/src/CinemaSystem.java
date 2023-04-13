@@ -28,17 +28,23 @@ outerMain: while(true) {
 									showAdminMenu();
 									switch(getInputValue()) {
 										case 1:{ //상영관 관리
-											showAdminMenu();
-											outerMovieInfo:switch(getInputValue()) {
-												case 1:{ //상영관 정보 조회
-													showTheaters();
-													break outerMovieInfo;
-												}
-												case 2:{ //상영관 정보 수정
-													editTheaters();
-													break;
+											while(true) {
+												showAdminMenu();
+												switch(getInputValue()) {
+													case 1:{ //상영관 정보 조회
+														showTheaters();
+														break;
+													}
+													case 2:{ //상영관 정보 수정
+														editTheaters();
+														break;
+													}
+													case 0:{
+														
+													}
 												}
 											}
+											
 										}
 										case 2:{ //회원목록 조회
 											showMembers();
