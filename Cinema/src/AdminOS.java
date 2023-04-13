@@ -20,7 +20,7 @@ public class AdminOS {
 			switch(cs.getInputValue()) {
 				case 1:{ //상영관 관리
 					while(true) {
-						showAdminMenu();
+						showTheaterMenu();
 						switch(cs.getInputValue()) {
 							case 1:{ //상영관 정보 조회
 								showTheaters();

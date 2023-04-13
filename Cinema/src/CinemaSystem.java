@@ -13,7 +13,7 @@ public class CinemaSystem {
 	private FileIO fileIO;
 	private BufferedReader br;	
 	private Member userLoggedIn;
-	private AdminOS AdminOs = new AdminOS(this);
+	private AdminOS AdminOs;
 	
 	
 
@@ -39,14 +39,17 @@ public class CinemaSystem {
 	public void run() {		
 		
 		while(true) {
-			firstDisplayPrint();			
+			firstDisplayPrint();
+			System.out.println("\n영화관 개수"+this.theaters.size());
+			System.out.println("회원 개수"+this.members.size());
 			switch(getInputValue()) {
 				case 1:{//1.회원 로그인
 					if( (userLoggedIn = login()) != null);{ //일반 회원이라면
 						if(!userLoggedIn.isAdmin()) {
 							//ReservationProcess reservationProcess = new ReservationProcess(this);
 							//ReservationProcess.showReservationMenu(isLoggedIn, userLoggedIn);	
-						} else { //관리자라면				 			
+						} else { //관리자라면
+							 AdminOs = new AdminOS(this);
 							 AdminOs.run();
 						}
 					} //일반회원이라면 
@@ -59,9 +62,11 @@ public class CinemaSystem {
 					}
 				case 3:{//3.회원가입
 					createUser();
-					break;
-					
+					break;					
 				}
+				case 0:{//프로그램 종료
+				}
+			
 		
 			
 			}
@@ -75,7 +80,7 @@ public class CinemaSystem {
 		// default 데이터
 		this.theaters.add(new Theater("스즈메", new int[] {3,4}, true));
 		this.theaters.add(new Theater("존윅", new int[] {10,10}, false));
-		this.members.add(new Member(0101234123, "1234", "oshh","오승환"));
+		this.members.add(new Member(0101234123, "1234", "oshh","오승환", true));
 		this.members.add(new Member(0101234567, "5678", "sjsj","장석진"));
 		Theater theater1 = (Theater) this.theaters.get(0);
 		Theater theater2 = (Theater) this.theaters.get(1);
