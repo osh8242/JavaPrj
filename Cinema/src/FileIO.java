@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileIO {
-		String path = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\";
+		String path = "D:\\JavaPrj\\IOtest\\";
 	//입력 함수
 		public ArrayList<Serializable> Input(String fileName) {
 //			String fileName =  (loadingDataset instanceof Theater) ? "Theater" :((loadingDataset instanceof Member) ? "Member" :(loadingDataset instanceof Reservation) ? "Reservation" : "noName");

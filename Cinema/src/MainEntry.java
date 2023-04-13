@@ -40,17 +40,17 @@ public class MainEntry {
 		//int reservationNo, User user, Theater theater, int[] seat
 		User user1 = (User) memberList.get(0);
 		Theater theater1 = (Theater) theaterList.get(0);
-		reservationList.add(new Reservation( user1, theater1,new int[]{3,4}));
-		reservationList.add(new Reservation( user1, theater1,new int[]{3,4}));
+		reservationList.add(new Reservation(user1, theater1,new int[]{3,4}));
+		reservationList.add(new Reservation(user1, theater1,new int[]{3,4}));
 		// 출력
-		fio.Output(reservationList, "Reservation");
+		fio.Output(reservationList, "Theater");
 		// 입력 
-		reservationList = fio.Input( "Reservation");
+		reservationList = fio.Input( "Theater");
 		System.out.println(reservationList.get(0));
 		
 		///////////////////////////////////////////////
 		
-		 
+		 cs.run();
 		
 
 	}
