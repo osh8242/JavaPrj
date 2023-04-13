@@ -40,12 +40,13 @@ public class CinemaSystem {
 		
 		while(true) {
 			firstDisplayPrint();
+			
 			switch(getInputValue()) {
 				case 1:{//1.회원 로그인
 					if( (userLoggedIn = login()) != null);{ //일반 회원이라면
 						if(!userLoggedIn.isAdmin()) {
-							//ReservationProcess reservationProcess = new ReservationProcess(this);
-							//ReservationProcess.showReservationMenu(isLoggedIn, userLoggedIn);	
+							ReservationProcess reservationProcess = new ReservationProcess(this);
+							reservationProcess.showReservationMenu(isLoggedIn);	
 						} else { //관리자라면
 							 AdminOs = new AdminOS(this);
 							 AdminOs.run();
@@ -54,8 +55,8 @@ public class CinemaSystem {
 					break;
 					} //로그인
 				case 2:{//2.비회원으로 예매
-					//ReservationProcess reservationProcess = new ReservationProcess(this);
-					//ReservationProcess.showReservationMenu(isLoggedIn, null);
+					ReservationProcess reservationProcess = new ReservationProcess(this);
+					reservationProcess.showReservationMenu(isLoggedIn);
 					break;
 					}
 				case 3:{//3.회원가입
@@ -136,6 +137,7 @@ public class CinemaSystem {
 				if(m.getUserPassword().equals(getStringValue())) {
 					System.out.println("로그인 성공!");
 					System.out.println(m.getUserName()+" 님, 환영합니다^^*");
+					isLoggedIn = true;
 					return m;
 				} else {
 					System.out.println("비밀번호가 올바르지 않습니다.");
