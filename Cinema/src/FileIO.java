@@ -75,8 +75,8 @@ public class FileIO {
 			// 원칙적인 처리
 		} catch (FileNotFoundException e) { // FileNotFoundException
 			System.out.println("파일이 존재 않습니다.");
-		} catch (EOFException e) {
-			String msg = (e.getMessage() == null)? "파일을 모두 불러왔습니다.":"에러";
+		} catch (EOFException e2) {
+			String msg = (e2.getMessage() == null)? "파일을 모두 불러왔습니다.":"에러";
 			System.out.println("... "+ msg);
 		} catch (IOException e3) {
 			e3.printStackTrace();
