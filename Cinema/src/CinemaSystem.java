@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -24,12 +25,13 @@ public class CinemaSystem {
 		this.members = new ArrayList<Member>();
 		this.reservations = new ArrayList<Reservation>();		
 		this.AdminOs = new AdminOS(this);
+		this.fileIO = new FileIO(this);
 		this.userLoggedIn = null;
-		this.fileIO = new FileIO();
-//		setDatasets();// 초기데이터 셋팅 : 데이터파일 최초 생성시에만
+			
+		fileIO.setDatasets();// 초기데이터 셋팅 : 데이터파일 최초 생성시에만 실행
 		getDatasets();// 입력(데이터 불러오기)
-
-		System.out.println("완료.");
+		System.out.println("데이터 불러오기완료. ");
+		System.out.println();
 
 		this.br = br;
 		this.userLoggedIn = userLoggedIn;
@@ -74,28 +76,6 @@ public class CinemaSystem {
 		} // while
 	}// run()
 
-	// 임시 데이터 셋팅 함수
-	private void setDatasets() {
-		System.out.println("초기 데이터를 셋팅중...");
-		// default 데이터
-
-		this.theaters.add(new Theater("스즈메", new int[] {3,4}, true));
-		this.theaters.add(new Theater("존윅", new int[] {10,10}, false));
-		this.members.add(new Member("010-1234-123", "1234", "oshh","오승환", true));
-		this.members.add(new Member("010-123-4567", "5678", "sjsj","장석진"));
-
-		Theater theater1 = (Theater) this.theaters.get(0);
-		Theater theater2 = (Theater) this.theaters.get(1);
-		User user1 = (User) this.members.get(0);
-		User user2 = (User) this.members.get(1);
-		//this.reservations.add(new Reservation( user1, theater1, new int[]{3,4}));
-		//this.reservations.add(new Reservation( user2, theater2, new int[]{1,1}));
-		// 임시 데이터 파일로 저장(출력)
-		fileIO.saveDataset(this.theaters, "Theater");
-		fileIO.saveDataset(this.members, "Member");
-		fileIO.saveDataset(this.reservations, "Reservation");
-	}
-
 	// 데이터 저장하는 함수
 	public void saveDatasets(ArrayList savingDataset, String fileName) {
 		System.out.println(fileName + " 파일을 저장중...");
@@ -104,13 +84,11 @@ public class CinemaSystem {
 	}
 
 	private void getDatasets() {
-		System.out.println("데이터를 불러옵니다.");
-		// 입력(데이터 불러오기)
+		System.out.println("파일을 불러옵니다.");
 		this.theaters = fileIO.loadDataset("Theater");
 		this.members = fileIO.loadDataset("Member");
 		this.reservations = fileIO.loadDataset("Reservation");
-		// System.out.println(this.theaters.get(0)); 뭐 불러왔는지 출력해주는 함수
-		System.out.println("로딩완료");
+//		System.out.println("로딩완료");
 	}
 
 	public int getInputValue() {
