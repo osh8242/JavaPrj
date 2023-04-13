@@ -44,26 +44,34 @@ public class CinemaSystem {
 	}
 
 	public void run() {
-		while (true) {
+		while (true) {			
 			firstDisplayPrint();
 			switch (getInputValue()) {
-			case 1: {// 1.회원 로그인 / 회원예매하기
-				userLoggedIn = login();
-				if (userLoggedIn == null)
+				case 1: {// 1.회원 로그인 / 회원예매하기
+					userLoggedIn = login();
+					if (userLoggedIn == null)
+						break;
+					if (!userLoggedIn.isAdmin()) {
+						reservationProcess.showReservationMenu(isLoggedIn);				
+					} else { // 관리자라면
+						AdminOs = new AdminOS(this);
+						AdminOs.run();					
+					}
+					isLoggedIn = !isLoggedIn;
+					userLoggedIn = null;
 					break;
-				if (!userLoggedIn.isAdmin()) {
+				} // 로그인
+				case 2: {// 2.비회원으로 예매
 					reservationProcess.showReservationMenu(isLoggedIn);
-				} else { // 관리자라면
-					AdminOs = new AdminOS(this);
-					AdminOs.run();
+					break;
 				}
-				isLoggedIn = !isLoggedIn;
-				userLoggedIn = null;
-				break;
-			}
-			}
-		}
-	}
+				case 3: {// 3.회원가입
+					createUser();
+					break;
+				}
+			}// swtich
+		} // while
+	}// run()
 
 	// 데이터 저장하는 함수
 	public void saveDatasets(ArrayList savingDataset, String fileName) {
@@ -77,6 +85,13 @@ public class CinemaSystem {
 		this.theaters = fileIO.loadDataset("Theater");
 		this.members = fileIO.loadDataset("Member");
 		this.reservations = fileIO.loadDataset("Reservation");
+		if(this.reservations!=null) {
+			String temp = this.reservations.get(this.reservations.size()-1).getReservationNo();
+			temp = temp.substring(temp.indexOf("-")+1); 
+			this.reservations.get(0).setCount(Integer.parseInt(temp));
+		}
+			
+			
 //		System.out.println("로딩완료");
 	}
 
@@ -144,9 +159,15 @@ public class CinemaSystem {
 			System.out.println("희망하는 회원ID를 입력하세요.(시작은 영문으로만, '_'를 제외한 특수문자 안되며 영문, 숫자, '_'으로만 이루어진 5 ~ 12자 이하)");
 			userId = getStringValue();
 			if (validation.isValidId(userId)) {
+				for(Member m : members) {
+					if(userId.equals(m.getUserId())) {
+						System.out.println("이미 사용중인 아이디입니다");
+						createUser();
+					}
+				}
 				break;
 			} else {
-				System.out.println("잘못입력하셨습니다.");
+				System.out.println("조건에 부합하지 않습니다.");
 			}
 		}
 
