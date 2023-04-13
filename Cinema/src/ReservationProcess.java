@@ -8,6 +8,7 @@ public class ReservationProcess {
 	public ArrayList<Theater> theaters;
 	private ArrayList<Reservation> reservations;
 	public Guest guest;
+	public Validation validation = new Validation();
 
 	public ReservationProcess(CinemaSystem cinemaSystem) {
 		this.cinemaSystem = cinemaSystem;
@@ -17,12 +18,13 @@ public class ReservationProcess {
 	}
 
 	public void showReservationMenu(boolean isLoggedIn) {
+		System.out.println();
 		System.out.println("원하는 메뉴를 입력하세요.");
+		System.out.println("0. 초기화면");
 		System.out.println("1. 상영정보 조회");
 		System.out.println("2. 영화예매");
 		System.out.println("3. 예매취소");
 		System.out.println("4. 예매확인");
-
 		if (isLoggedIn) {
 			System.out.println("5. 적립포인트 확인");
 		}
@@ -30,6 +32,8 @@ public class ReservationProcess {
 		switch (cinemaSystem.getInputValue())
 
 		{
+		case 0:
+			return;
 		case 1:
 			showMovieList();
 			showReservationMenu(isLoggedIn);
@@ -51,6 +55,7 @@ public class ReservationProcess {
 			} else {
 				break;
 			}
+
 		}
 	}
 
@@ -74,9 +79,8 @@ public class ReservationProcess {
 		while (!isLoggedIn) {
 			System.out.println("[비회원용] 설정하실 비밀번호를 입력해주세요.(숫자 6자리)");
 			String password = cinemaSystem.getStringValue();
-			String pattern = "\\d{6}";
-			if (Pattern.matches(pattern, password)) {
-
+			
+			if (validation.isValidGuestPassword(password)) {
 				System.out.println("[비회원용] 설정하실 비밀번호를 한번 더 입력해주세요.");
 				String password2 = cinemaSystem.getStringValue();
 
@@ -95,6 +99,7 @@ public class ReservationProcess {
 			}
 
 		}
+
 		if (movieNum - 1 <= theaters.size()) {
 			System.out.println("선택하신 영화는 " + theaters.get(movieNum - 1).getMovie() + "입니다.");
 			for (int j = 0; j < theaters.get(movieNum - 1).getSeat().length; j++) {
