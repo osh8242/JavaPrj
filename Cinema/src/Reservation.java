@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 
 
-public class Reservation {
+public class Reservation implements Serializable {
 	private static int count = 0;
 	private String reservationNo;
 	private User user;
