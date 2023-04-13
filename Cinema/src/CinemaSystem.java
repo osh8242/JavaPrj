@@ -36,41 +36,48 @@ public class CinemaSystem {
 		this.userLoggedIn = userLoggedIn;
 	}
 
-	public void run() {		
-		
+	public void run() {
 		while(true) {
 
-			  firstDisplayPrint();
-			
+			firstDisplayPrint();
+			System.out.println();
+			System.out.println("총 회원수 : "+ members.size());
 			switch(getInputValue()) {
-			
-				case 1:{//1.회원 로그인
-					if( (userLoggedIn = login()) != null);{ //일반 회원이라면
-						if(!userLoggedIn.isAdmin()) {
-							ReservationProcess reservationProcess = new ReservationProcess(this);
-							reservationProcess.showReservationMenu(isLoggedIn);	
-						} else { //관리자라면	
-							this.AdminOs = new AdminOS(this);
-							AdminOs.run();
-						}
-					} //일반회원이라면 
+				case 1:{//1.회원 로그인 / 회원예매하기
+					if(!isLoggedIn) {
+						if( (userLoggedIn = login()) != null);{ //일반 회원이라면
+							if(!userLoggedIn.isAdmin()) {
+								ReservationProcess reservationProcess = new ReservationProcess(this);
+								reservationProcess.showReservationMenu(isLoggedIn);
+								isLoggedIn = !isLoggedIn;
+								userLoggedIn = null;
+							} else { //관리자라면	
+								 AdminOs = new AdminOS(this);
+								 AdminOs.run();
+							}
+						} //일반회원이라면 
+					} else {
+						ReservationProcess reservationProcess = new ReservationProcess(this);
+						reservationProcess.showReservationMenu(isLoggedIn);
+					}
+
 					break;
-					} //로그인
+				} //로그인
 				case 2:{//2.비회원으로 예매
 					ReservationProcess reservationProcess = new ReservationProcess(this);
 					reservationProcess.showReservationMenu(isLoggedIn);
 					break;
-					}
+				}
 				case 3:{//3.회원가입
 					createUser();
 					break;
-					
 				}
-		
-			
+				case 4:{
+					if(isLoggedIn) isLoggedIn = !isLoggedIn;
+					break;
+				}
 			}
 		}
-		
 	}
 	
 	
@@ -94,13 +101,14 @@ public class CinemaSystem {
 		fileIO.saveDataset(this.members, "Member");
 		fileIO.saveDataset(this.reservations, "Reservation");		
 	}
-	
+
 	// 데이터 저장하는 함수
 	private void saveDatasets(ArrayList savingDataset, String fileName) {
-	      System.out.println("데이터 파일을 저장중...");
-	      fileIO.saveDataset(savingDataset, fileName); 
-	      System.out.println("저장완료");
-    }
+		System.out.println("데이터 파일을 저장중...");
+		fileIO.saveDataset(savingDataset, fileName);
+		System.out.println("저장완료");
+	}
+
 
 	private void getDatasets() {
 		System.out.println("데이터를 불러옵니다.");
@@ -108,7 +116,8 @@ public class CinemaSystem {
 		this.theaters = fileIO.loadDataset( "Theater");
 		this.members = fileIO.loadDataset( "Member");
 		this.reservations = fileIO.loadDataset( "Reservation");
-		//System.out.println(this.theaters.get(0));
+		//System.out.println(this.theaters.get(0)); 뭐 불러왔는지 출력해주는 함수
+		System.out.println("로딩완료");
 	}
 	
 	public int getInputValue() {
@@ -133,7 +142,7 @@ public class CinemaSystem {
 	
 	public void firstDisplayPrint() {
 	System.out.println("메뉴 선택 :");
-	System.out.println("[1.회원 로그인]\t[2.비회원으로 예매]\t[3.회원가입]");
+	if(!isLoggedIn) System.out.println("[1.회원 로그인]\t[2.비회원으로 예매]\t[3.회원가입]");	
 	System.out.print("입력> ");
 	}
 	

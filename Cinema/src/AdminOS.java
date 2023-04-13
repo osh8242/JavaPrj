@@ -19,7 +19,7 @@ public class AdminOS {
 			showAdminMenu();
 			switch(cs.getInputValue()) {
 				case 1:{ //상영관 관리
-					outer:while(true) {
+					outer1:while(true) {
 						showTheaterMenu();
 						switch(cs.getInputValue()) {
 							case 1:{ //상영관 정보 조회
@@ -30,13 +30,12 @@ public class AdminOS {
 								editTheaters();
 								break;
 							}
-							case 0:{ //돌아가기
-								break outer;
+							case 3:{ //돌아가기
+								break outer1;
 							}
 						}
 					}
 					break;
-					
 				}
 				case 2:{ //회원목록 조회
 					showMembers();
@@ -141,6 +140,7 @@ public class AdminOS {
 		for (Member m : this.members) {
 			System.out.println(m.toString());
 		}
+		System.out.println("총 회원수 : " + members.size());
 	}
 	
 	public void editMember() {
@@ -158,7 +158,7 @@ public class AdminOS {
 			System.out.println("해당 아이디를 가진 회원이 없습니다.");
 			return;
 		}
-		while(true) {
+		outer:while(true) {
 			System.out.println("선택된 회원 정보 : ");
 			System.out.println(member.toString());
 			System.out.println("수정하고자 하는 내용을 선택하세요");
@@ -183,21 +183,21 @@ public class AdminOS {
 					System.out.println("현재 유저의 핸드폰번호는 : "+member.getUserPhoneNumber());
 					System.out.println("수정할 값을 입력하세요");
 					member.setUserPhoneNumber(cs.getStringValue());
-					System.out.println("수정된 유저의 비밀번호는 : "+member.getUserPhoneNumber());
+					System.out.println("수정된 유저의 핸드폰번호는 : "+member.getUserPhoneNumber());
 					continue;
 				}
 				case 4:{ //회원이름
-					System.out.println("현재 유저의 비밀번호는 : "+member.getUserName());
+					System.out.println("현재 유저의 회원이름은 : "+member.getUserName());
 					System.out.println("수정할 값을 입력하세요");
 					member.setUserName(cs.getStringValue());
-					System.out.println("수정된 유저의 비밀번호는 : "+member.getUserName());
+					System.out.println("수정된 유저의 회원이름은 : "+member.getUserName());
 					continue;
 				}
 				case 5:{ //적립포인트
-					System.out.println("현재 유저의 비밀번호는 : "+member.getUserPoint());
+					System.out.println("현재 유저의 적립포인트는 : "+member.getUserPoint());
 					System.out.println("수정할 값을 입력하세요");
 					member.setUserPoint(cs.getInputValue());
-					System.out.println("수정된 유저의 비밀번호는 : "+member.getUserPoint());
+					System.out.println("수정된 유저의 적립포인트는 : "+member.getUserPoint());
 					continue;
 				}
 				case 6:{ //관리자 권한
@@ -213,7 +213,7 @@ public class AdminOS {
 					
 				}	
 				case 0:{ //종료
-					break;
+					break outer;
 				}
 				default:{
 					System.out.println("잘못된 값을 입력하셨습니다.");
