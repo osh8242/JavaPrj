@@ -88,6 +88,7 @@ public class CinemaSystem {
 		this.theaters = fileIO.loadDataset("Theater");
 		this.members = fileIO.loadDataset("Member");
 		this.reservations = fileIO.loadDataset("Reservation");
+		System.out.println(this.reservations.get(0).toString());
 //		System.out.println("로딩완료");
 	}
 

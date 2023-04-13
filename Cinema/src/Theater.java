@@ -53,7 +53,7 @@ public class Theater implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Theater [movie: " + movie + ", seat: " + ", isImax: " + isImax + ", price: " + price + "]";
+		return "Theater [movie: " + movie + ", seat: "+seat[0].length+"-"+seat.length + ", isImax: " + isImax + ", price: " + price + "]";
 	}
 
 	public void showSeat() {
