@@ -61,10 +61,10 @@ public class Theater implements Serializable{
 		}
 	}
 
-//	@Override
-//	public String getClassName() {
-//		return "Theater";
-//	}
+
+	public String getClassName() {
+		return "Theater";
+	}
 	
 	
 	

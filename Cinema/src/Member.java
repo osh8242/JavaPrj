@@ -2,8 +2,8 @@ import java.io.Serializable;
 
 
 public class Member extends User {
+	
 	private String userPhoneNumber;
-
 	private String userId;
 	private String userName;
 	private int userPoint;
