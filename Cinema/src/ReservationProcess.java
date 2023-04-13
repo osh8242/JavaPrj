@@ -8,6 +8,7 @@ public class ReservationProcess {
    public ArrayList<Theater> theaters;
    private ArrayList<Reservation> reservations;
    public Guest guest;
+   public Validation validation = new Validation();
    
    public ReservationProcess(CinemaSystem cinemaSystem) {
       this.cinemaSystem = cinemaSystem;
@@ -72,8 +73,8 @@ public class ReservationProcess {
       while (!isLoggedIn) {
          System.out.println("[비회원용] 설정하실 비밀번호를 입력해주세요.(숫자 6자리)");
          String password = cinemaSystem.getStringValue();
-         String pattern = "\\d{6}";
-         if (Pattern.matches(pattern, password)) {
+         
+         if (validation.isValidGuestPassword(password)) {
 
             System.out.println("[비회원용] 설정하실 비밀번호를 한번 더 입력해주세요.");
             String password2 = cinemaSystem.getStringValue();

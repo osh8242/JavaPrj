@@ -14,6 +14,7 @@ public class CinemaSystem {
 	private BufferedReader br;	
 	public Member userLoggedIn;
 	private AdminOS AdminOs;
+	public Validation validation = new Validation();
 
 	
 	public CinemaSystem() {
@@ -87,8 +88,8 @@ public class CinemaSystem {
 		// default 데이터
 		this.theaters.add(new Theater("스즈메", new int[] {3,4}, true));
 		this.theaters.add(new Theater("존윅", new int[] {10,10}, false));
-		this.members.add(new Member(0101234123, "1234", "oshh","오승환", true));
-		this.members.add(new Member(0101234567, "5678", "sjsj","장석진"));
+		this.members.add(new Member("0101234123", "1234", "oshh","오승환", true));
+		this.members.add(new Member("0101234567", "5678", "sjsj","장석진"));
 		Theater theater1 = (Theater) this.theaters.get(0);
 		Theater theater2 = (Theater) this.theaters.get(1);
 		User user1 = (User) this.members.get(0);
@@ -168,14 +169,39 @@ public class CinemaSystem {
 	}	
 	
 	public void createUser() {
-		System.out.println("희망하는 회원ID를 입력하세요");
-		String userId = getStringValue();
-		System.out.println("비밀번호를 입력하세요");
-		String userPassword = getStringValue();
-		System.out.println("회원이름을 입력하세요");
-		String userName = getStringValue();
-		System.out.println("핸드폰번호를 입력하세요");
-		int userPhoneNumber = getInputValue();
+		String userId;
+		String userPassword;
+		String userName;
+		String userPhoneNumber;
+		
+		while(true) {
+			System.out.println("희망하는 회원ID를 입력하세요.(시작은 영문으로만, '_'를 제외한 특수문자 안되며 영문, 숫자, '_'으로만 이루어진 5 ~ 12자 이하)");
+			userId = getStringValue();
+			if(validation.isValidId(userId)){break;}
+			else {System.out.println("잘못입력하셨습니다.");}
+		}
+		
+		while(true) {
+			System.out.println("비밀번호를 입력하세요.(영문, 특수문자, 숫자 포함 8자 이상)");
+			userPassword = getStringValue();
+			if(validation.isValidPassword(userPassword)){break;}
+			else {System.out.println("잘못입력하셨습니다.");}
+		}
+		
+		while(true) {
+			System.out.println("회원이름을 입력하세요.(한글만)");
+			userName = getStringValue();
+			if(validation.isValidName(userName)){break;}
+			else {System.out.println("잘못입력하셨습니다.");}
+		}
+		
+		while(true) {
+			System.out.println("핸드폰번호를 입력하세요. (-입력하세요)");
+			userPhoneNumber = getStringValue();
+			if(validation.isValidPhonenumber(userPhoneNumber)){break;}
+			else {System.out.println("잘못입력하셨습니다.");}
+		}
+		
 		members.add(new Member(userPhoneNumber, userPassword, userId, userName));
 		System.out.println("회원가입이 완료되었습니다.");
 		System.out.println("가입정보 : ");
