@@ -12,8 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileIO {
-
-		String path = "D:\\JavaPrj\\IOtest\\";
+//		String path = "D:\\JavaPrj\\IOtest\\"; // 승환
+		String path = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest"; // 나은
+//		String path = "C:\\Team4\\IOtest"; // 석진
+//		String path = ""; // 창현
+		
+		
 	// 데이터 불러오기 함수
 		public ArrayList loadDataset(String fileName) {
 
