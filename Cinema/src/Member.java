@@ -1,6 +1,6 @@
 
 public class Member extends User {
-	private int userPhoneNumber;
+	private String userPhoneNumber;
 	private String userId;
 	private String userName;
 	private int userPoint;
@@ -22,10 +22,10 @@ public class Member extends User {
 		this.userPoint = -10000;
 		this.isAdmin = isAdmin;
 	}	
-	public int getUserPhoneNumber() {
+	public String getUserPhoneNumber() {
 		return userPhoneNumber;
 	}
-	public void setUserPhoneNumber(int userPhoneNumber) {
+	public void setUserPhoneNumber(String userPhoneNumber) {
 		this.userPhoneNumber = userPhoneNumber;
 	}
 	public String getUserId() {
