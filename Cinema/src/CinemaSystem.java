@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class CinemaSystem {
 
 	public boolean isLoggedIn;
-	private ReservationProcess reservationProcess;
 	public ArrayList<Theater> theaters;
 	public ArrayList<Reservation> reservations;
 	public ArrayList<Member> members;
@@ -14,67 +13,58 @@ public class CinemaSystem {
 	private BufferedReader br;
 	public Member userLoggedIn;
 	private AdminOS AdminOs;
-	public Validation validation = new Validation();
+	public Validation validation;
+	ReservationProcess reservationProcess;
 
 	public CinemaSystem() {
 
 		this.isLoggedIn = false;
+		this.theaters = new ArrayList<>();
+		this.members = new ArrayList<>();
+		this.reservations = new ArrayList<>();
+		this.AdminOs = new AdminOS(this);
+		this.userLoggedIn = null;
+		this.fileIO = new FileIO(this);
 		this.reservationProcess = new ReservationProcess(this);
+		this.validation = new Validation();
 
 		this.theaters = new ArrayList<Theater>();
 		this.members = new ArrayList<Member>();
-		this.reservations = new ArrayList<Reservation>();		
+		this.reservations = new ArrayList<Reservation>();
 		this.AdminOs = new AdminOS(this);
 		this.fileIO = new FileIO(this);
 		this.userLoggedIn = null;
-			
+
 		fileIO.setDatasets();// 초기데이터 셋팅 : 데이터파일 최초 생성시에만 실행
 		getDatasets();// 입력(데이터 불러오기)
 		System.out.println("데이터 불러오기완료. ");
 		System.out.println();
 
-		this.br = br;
-		this.userLoggedIn = userLoggedIn;
+//        this.br = br;
+//        this.userLoggedIn = userLoggedIn;
 	}
 
 	public void run() {
 		while (true) {
 			firstDisplayPrint();
-			switch(getInputValue()) {
-				case 1:{//1.회원 로그인 / 회원예매하기
-					userLoggedIn = login();
-					if(userLoggedIn == null) break;
-					if(!userLoggedIn.isAdmin()) {
-						ReservationProcess reservationProcess = new ReservationProcess(this);
-						reservationProcess.showReservationMenu(isLoggedIn);
-						isLoggedIn = !isLoggedIn;
-						userLoggedIn = null;
-					} else { //관리자라면	
-						 AdminOs = new AdminOS(this);
-						 AdminOs.run();
-						 isLoggedIn = !isLoggedIn;
-						 userLoggedIn = null;
-					}
+			switch (getInputValue()) {
+			case 1: {// 1.회원 로그인 / 회원예매하기
+				userLoggedIn = login();
+				if (userLoggedIn == null)
 					break;
-					
-				} //로그인
-				case 2:{//2.비회원으로 예매
-					ReservationProcess reservationProcess = new ReservationProcess(this);
+				if (!userLoggedIn.isAdmin()) {
 					reservationProcess.showReservationMenu(isLoggedIn);
-					break;
-				}				
-				case 3: {// 3.회원가입
-					createUser();
-					break;
+				} else { // 관리자라면
+					AdminOs = new AdminOS(this);
+					AdminOs.run();
 				}
-				case 4: {
-					if (isLoggedIn)
-						isLoggedIn = !isLoggedIn;
-					break;
-				}
-			}// swtich
-		} // while
-	}// run()
+				isLoggedIn = !isLoggedIn;
+				userLoggedIn = null;
+				break;
+			}
+			}
+		}
+	}
 
 	// 데이터 저장하는 함수
 	public void saveDatasets(ArrayList savingDataset, String fileName) {
@@ -194,14 +184,6 @@ public class CinemaSystem {
 		System.out.println("회원가입이 완료되었습니다.");
 		System.out.println("가입정보 : ");
 		System.out.println("ID : " + userId + " / " + "회원이름 : " + userName + " / " + "핸드폰 번호 : " + userPhoneNumber);
-	}
-
-	public boolean isLoggedIn() {
-		return isLoggedIn;
-	}
-
-	public void setLoggedIn(boolean isLoggedIn) {
-		this.isLoggedIn = isLoggedIn;
 	}
 
 }
