@@ -103,17 +103,20 @@ public class ReservationProcess {
 
                   // 예약되지 않은 좌석 판별
                   boolean isReserved = false;
-                  for (Reservation reservation : reservations) {
-                     if (reservation.getTheater().getMovie().equals(theaters.get(i).getMovie())
-                           && Arrays.equals(reservation.getSeat(), seat)) {
-                        isReserved = true;
-                        break;
-                     }
-                  }
-                  if (isReserved) {
-                     System.out.print("[예매불가]");
-                  } else {
-                     System.out.printf("[%d-%d]", seat[0], seat[1]);
+                  if(reservations != null) {
+                	  
+	                  for (Reservation reservation : reservations) {
+	                     if (reservation.getTheater().getMovie().equals(theaters.get(i).getMovie())
+	                           && Arrays.equals(reservation.getSeat(), seat)) {
+	                        isReserved = true;
+	                        break;
+	                     }
+	                  }
+	                  if (isReserved) {
+	                     System.out.print("[예매불가]");
+	                  } else {
+	                     System.out.printf("[%d-%d]", seat[0], seat[1]);
+	                  }
                   }
                }
                System.out.println();

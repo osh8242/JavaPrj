@@ -24,7 +24,7 @@ public class CinemaSystem {
 		this.theaters = new ArrayList<Theater>();
 		this.members = new ArrayList<Member>();
 		this.reservations = new ArrayList<Reservation>();
-		this.AdminOs = new AdminOS(this);
+//		this.AdminOs = new AdminOS(this);
 		
 		this.fileIO = new FileIO();
 		setDatasets();// 초기데이터 셋팅 : 기능 구현 후 삭제
@@ -40,14 +40,18 @@ public class CinemaSystem {
 		
 		while(true) {
 
+			  firstDisplayPrint();
+			
 			switch(getInputValue()) {
+			
 				case 1:{//1.회원 로그인
 					if( (userLoggedIn = login()) != null);{ //일반 회원이라면
 						if(!userLoggedIn.isAdmin()) {
 							ReservationProcess reservationProcess = new ReservationProcess(this);
 							reservationProcess.showReservationMenu(isLoggedIn);	
-						} else { //관리자라면							 
-							 AdminOs.run();
+						} else { //관리자라면	
+							this.AdminOs = new AdminOS(this);
+							AdminOs.run();
 						}
 					} //일반회원이라면 
 					break;
@@ -83,15 +87,21 @@ public class CinemaSystem {
 		Theater theater2 = (Theater) this.theaters.get(1);
 		User user1 = (User) this.members.get(0);
 		User user2 = (User) this.members.get(1);
-		this.reservations.add(new Reservation( user1, theater1, new int[]{3,4}));
-		this.reservations.add(new Reservation( user2, theater2, new int[]{1,1}));
+//		this.reservations.add(new Reservation( user1, theater1, new int[]{3,4}));
+//		this.reservations.add(new Reservation( user2, theater2, new int[]{1,1}));
         // 임시 데이터 파일로 저장(출력)
 		fileIO.saveDataset(this.theaters, "Theater");
 		fileIO.saveDataset(this.members, "Member");
 		fileIO.saveDataset(this.reservations, "Reservation");		
 	}
-	// 프로그램 졸료시 데이터 저장하는 함수 만들기
 	
+	// 데이터 저장하는 함수
+	private void saveDatasets(ArrayList savingDataset, String fileName) {
+	      System.out.println("데이터 파일을 저장중...");
+	      fileIO.saveDataset(savingDataset, fileName); 
+	      System.out.println("저장완료");
+    }
+
 	private void getDatasets() {
 		System.out.println("데이터를 불러옵니다.");
 		// 입력(데이터 불러오기) 

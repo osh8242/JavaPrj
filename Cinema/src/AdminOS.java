@@ -138,7 +138,7 @@ public class AdminOS {
 	}
 	
 	public void showMembers() {
-		for (Member m : members) {
+		for (Member m : this.members) {
 			System.out.println(m.toString());
 		}
 	}
