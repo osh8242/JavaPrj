@@ -12,19 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileIO {
-
+		String path = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\";
 	//입력 함수
 		public ArrayList<Serializable> Input(String fileName) {
 //			String fileName =  (loadingDataset instanceof Theater) ? "Theater" :((loadingDataset instanceof Member) ? "Member" :(loadingDataset instanceof Reservation) ? "Reservation" : "noName");
 			
-			String filename = "D:\\JavaPrj\\IOtest\\"+fileName+".txt";
-			System.out.println("불러오기 경로 : "+filename);
+			String filePath = path+fileName+".txt";
+			System.out.println("불러오기 경로 : "+filePath);
 			FileInputStream fis = null;
 			BufferedInputStream bis = null;
 			ObjectInputStream in = null;
 			
 			try {
-				fis = new FileInputStream(filename);
+				fis = new FileInputStream(filePath);
 				bis = new BufferedInputStream(fis);
 				in = new ObjectInputStream(bis);
 				
@@ -67,9 +67,15 @@ public class FileIO {
 	       ObjectOutputStream out=null;
 
 	       try {
+<<<<<<< HEAD
 	    	   String filename = "D:\\JavaPrj\\IOtest\\"+fileName+".txt";
 	    	   System.out.println("저장하기 경로 : "+filename);
 	           fos = new FileOutputStream("D:\\JavaPrj\\IOtest\\"+fileName+".txt");
+=======
+	    	   String filePath = path+fileName+".txt";
+	    	   System.out.println("저장하기 경로 : "+filePath);
+	           fos = new FileOutputStream(filePath);
+>>>>>>> 566d61c0e468127b4942b61b0219ab72213cc170
 	           bos = new BufferedOutputStream(fos);
 	           out = new ObjectOutputStream(bos);
 	         
