@@ -22,9 +22,16 @@ public class Member extends User implements Serializable {
 		this.userName = userName;
 		this.userPoint = -10000;
 		this.isAdmin = isAdmin;
+	}	
+	public int getUserPhoneNumber() {
+		return userPhoneNumber;
 	}
-	
-	public String getUserId() {          
+	public void setUserPhoneNumber(int userPhoneNumber) {
+		this.userPhoneNumber = userPhoneNumber;
+	}
+
+	public String getUserId() {
+
 		return userId;
 	}
 	public void setUserId(String userId) {
@@ -44,7 +51,10 @@ public class Member extends User implements Serializable {
 	}
 
 	public boolean isAdmin() {
-		return isAdmin;
+		return isAdmin;		
+	}	
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	@Override
