@@ -15,7 +15,7 @@ public class FileIO {
 
 		String path = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\";
 	// 데이터 불러오기 함수
-		public ArrayList Input(String fileName) {
+		public ArrayList loadDataset(String fileName) {
 
 //			String fileName =  (loadingDataset instanceof Theater) ? "Theater" :((loadingDataset instanceof Member) ? "Member" :(loadingDataset instanceof Reservation) ? "Reservation" : "noName");
 			
@@ -62,7 +62,7 @@ public class FileIO {
 		
 		
 		// 데이터 내보내기 함수
-	   public void Output(ArrayList savingDataset, String fileName) {
+	   public void saveDataset(ArrayList savingDataset, String fileName) {
 		   
 	       FileOutputStream fos = null;
 	       BufferedOutputStream bos = null;

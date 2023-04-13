@@ -84,16 +84,17 @@ public class CinemaSystem {
 		this.reservations.add(new Reservation( user1, theater1,new int[]{3,4}));
 		this.reservations.add(new Reservation( user2, theater2,new int[]{1,1}));
         // 임시 데이터 파일로 저장(출력)
-		fileIO.Output(this.theaters, "Theater");
-		fileIO.Output(this.members, "Member");
-		fileIO.Output(this.reservations, "Reservation");		
+		fileIO.saveDataset(this.theaters, "Theater");
+		fileIO.saveDataset(this.members, "Member");
+		fileIO.saveDataset(this.reservations, "Reservation");		
 	}
+	
 	private void getDatasets() {
 		System.out.println("데이터를 불러옵니다.");
 		// 입력(데이터 불러오기) 
-		this.theaters = fileIO.Input( "Theater");
-		this.members = fileIO.Input( "Member");
-		this.reservations = fileIO.Input( "Reservation");
+		this.theaters = fileIO.loadDataset( "Theater");
+		this.members = fileIO.loadDataset( "Member");
+		this.reservations = fileIO.loadDataset( "Reservation");
 		//System.out.println(this.theaters.get(0));
 	}
 	
