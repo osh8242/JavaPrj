@@ -39,8 +39,6 @@ public class CinemaSystem {
 	public void run() {
 		while(true) {
 			firstDisplayPrint();
-			System.out.println();
-			System.out.println("총 회원수 : "+ members.size());
 			switch(getInputValue()) {
 				case 1:{//1.회원 로그인 / 회원예매하기
 					if(!isLoggedIn) {
@@ -53,7 +51,10 @@ public class CinemaSystem {
 							} else { //관리자라면	
 								 AdminOs = new AdminOS(this);
 								 AdminOs.run();
+								 isLoggedIn = !isLoggedIn;
+								 userLoggedIn = null;
 							}
+							break;
 						} //일반회원이라면 
 					} else {
 						ReservationProcess reservationProcess = new ReservationProcess(this);
@@ -74,9 +75,9 @@ public class CinemaSystem {
 					if(isLoggedIn) isLoggedIn = !isLoggedIn;
 					break;
 				}
-			}
-		}
-	}
+			}//swtich
+		}//while
+	}//run()
 	
 	
 	
