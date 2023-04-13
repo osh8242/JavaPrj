@@ -16,36 +16,9 @@ public class CinemaSystem {
 	private AdminOS AdminOs = new AdminOS(this);
 	
 	
-	// 임시 데이터 셋팅 함수
-	private void setDatasets() {
-		System.out.println("초기 데이터를 셋팅중...");
-		// default 데이터
-		this.theaters.add(new Theater("스즈메", new int[] {3,4}, true));
-		this.theaters.add(new Theater("존윅", new int[] {10,10}, false));
-		this.members.add(new Member(0101234123, "1234", "oshh","오승환"));
-		this.members.add(new Member(0101234567, "5678", "sjsj","장석진"));
-		Theater theater1 = (Theater) this.theaters.get(0);
-		Theater theater2 = (Theater) this.theaters.get(1);
-		User user1 = (User) this.members.get(0);
-		User user2 = (User) this.members.get(1);
-		this.reservations.add(new Reservation( user1, theater1,new int[]{3,4}));
-		this.reservations.add(new Reservation( user2, theater2,new int[]{1,1}));
-        // 임시 데이터 파일로 저장(출력)
-		fileIO.Output(this.theaters, "Theater");
-		fileIO.Output(this.members, "Member");
-		fileIO.Output(this.reservations, "Reservation");		
-	}
-	private void getDatasets() {
-		System.out.println("데이터를 불러옵니다.");
-		// 입력(데이터 불러오기) 
-		this.theaters = fileIO.Input( "Theater");
-		this.members = fileIO.Input( "Member");
-		this.reservations = fileIO.Input( "Reservation");
-		//System.out.println(this.theaters.get(0));
-	}
+
 	
 	public CinemaSystem() {
-		super();
 
 		this.isLoggedIn = false;
 		this.reservationProcess = new ReservationProcess();
@@ -94,6 +67,34 @@ public class CinemaSystem {
 			}
 		}
 		
+	}
+	
+	// 임시 데이터 셋팅 함수
+	private void setDatasets() {
+		System.out.println("초기 데이터를 셋팅중...");
+		// default 데이터
+		this.theaters.add(new Theater("스즈메", new int[] {3,4}, true));
+		this.theaters.add(new Theater("존윅", new int[] {10,10}, false));
+		this.members.add(new Member(0101234123, "1234", "oshh","오승환"));
+		this.members.add(new Member(0101234567, "5678", "sjsj","장석진"));
+		Theater theater1 = (Theater) this.theaters.get(0);
+		Theater theater2 = (Theater) this.theaters.get(1);
+		User user1 = (User) this.members.get(0);
+		User user2 = (User) this.members.get(1);
+		this.reservations.add(new Reservation( user1, theater1,new int[]{3,4}));
+		this.reservations.add(new Reservation( user2, theater2,new int[]{1,1}));
+        // 임시 데이터 파일로 저장(출력)
+		fileIO.Output(this.theaters, "Theater");
+		fileIO.Output(this.members, "Member");
+		fileIO.Output(this.reservations, "Reservation");		
+	}
+	private void getDatasets() {
+		System.out.println("데이터를 불러옵니다.");
+		// 입력(데이터 불러오기) 
+		this.theaters = fileIO.Input( "Theater");
+		this.members = fileIO.Input( "Member");
+		this.reservations = fileIO.Input( "Reservation");
+		//System.out.println(this.theaters.get(0));
 	}
 	
 	public int getInputValue() {
