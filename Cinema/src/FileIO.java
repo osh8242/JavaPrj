@@ -12,12 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileIO {
-	
-	// Theater입력 함수
-		public ArrayList<Serializable> Input(List<Serializable> loadingDataset, String fileName) {
+
+	//입력 함수
+		public ArrayList<Serializable> Input(String fileName) {
 //			String fileName =  (loadingDataset instanceof Theater) ? "Theater" :((loadingDataset instanceof Member) ? "Member" :(loadingDataset instanceof Reservation) ? "Reservation" : "noName");
-			String filename = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\"+fileName+".txt";
 			
+			String filename = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\"+fileName+".txt";
+			System.out.println("불러오기 경로 : "+filename);
 			FileInputStream fis = null;
 			BufferedInputStream bis = null;
 			ObjectInputStream in = null;
@@ -36,8 +37,9 @@ public class FileIO {
 				System.out.println("파일이 존재 않습니다.");
 			}catch (EOFException e) {
 				System.out.println("끝 " + e.getMessage());
-			}catch (IOException e) {
-				System.out.println("파일을 읽을 수 없습니다.");
+			}catch (IOException e3) {
+				e3.printStackTrace();
+				System.out.println(fileName+"파일을 읽을 수 없습니다.");
 			}catch (ClassNotFoundException e) { //ClassNotFoundException
 				System.out.println("해당 객체가 존재하지 않습니다.");
 			}catch (Exception e) {
@@ -65,7 +67,8 @@ public class FileIO {
 	       ObjectOutputStream out=null;
 
 	       try {
-	    		    	   
+	    	   String filename = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\"+fileName+".txt";
+	    	   System.out.println("저장하기 경로 : "+filename);
 	           fos = new FileOutputStream("C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\"+fileName+".txt");
 	           bos = new BufferedOutputStream(fos);
 	           out = new ObjectOutputStream(bos);
@@ -90,9 +93,11 @@ public class FileIO {
 	      
 	   }
 	
+
 	//========================================================================================
-	/*
-	 
+	
+	 /*
+
 	// Theater입력 함수
 	public ArrayList<Theater> Input() {
 		String filename = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest\\theaterList.txt";
@@ -168,5 +173,7 @@ public class FileIO {
       }
       
    }
-	 */
+   	  
+	  */
+	 
 }

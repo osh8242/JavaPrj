@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public class Member extends User implements Serializable { //, Dataset{
+public class Member extends User implements Serializable { 
 	private int userPhoneNumber;
 	private String userId;
 	private String userName;

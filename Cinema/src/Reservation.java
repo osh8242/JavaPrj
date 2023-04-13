@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.Arrays;
 
-public class Reservation implements Serializable{ //,, Dataset{
+public class Reservation implements Serializable{ 
 
 	private int reservationNo;
 	private User user;

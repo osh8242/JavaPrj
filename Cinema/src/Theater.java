@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.Arrays;
 
-public class Theater implements Serializable{ //,, Dataset{
+public class Theater implements Serializable{ 
 	private String movie;
 	private String[][] seat;
 	private boolean isImax;
