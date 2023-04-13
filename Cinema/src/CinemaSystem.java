@@ -78,8 +78,7 @@ public class CinemaSystem {
 		// default 데이터
 		this.theaters.add(new Theater("스즈메", new int[] {3,4}, true));
 		this.theaters.add(new Theater("존윅", new int[] {10,10}, false));
-//		this.members.add(new Member(0101234123, "1234", "admin","admin",true));
-		this.members.add(new Member(0101234123, "1234", "oshh","오승환"));
+		this.members.add(new Member(0101234123, "1234", "oshh","오승환", true));
 		this.members.add(new Member(0101234567, "5678", "sjsj","장석진"));
 		Theater theater1 = (Theater) this.theaters.get(0);
 		Theater theater2 = (Theater) this.theaters.get(1);
@@ -92,6 +91,7 @@ public class CinemaSystem {
 		fileIO.saveDataset(this.members, "Member");
 		fileIO.saveDataset(this.reservations, "Reservation");		
 	}
+	// 프로그램 졸료시 데이터 저장하는 함수 만들기
 	
 	private void getDatasets() {
 		System.out.println("데이터를 불러옵니다.");
