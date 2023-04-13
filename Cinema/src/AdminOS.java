@@ -3,15 +3,9 @@ import java.util.ArrayList;
 public class AdminOS {
 
     public CinemaSystem cs;
-    public ArrayList<Theater> theaters;
-    public ArrayList<Reservation> reservations;
-    public ArrayList<Member> members;
 
     public AdminOS(CinemaSystem cinemaSystem) {
         this.cs = cinemaSystem;
-        this.theaters = cinemaSystem.theaters;
-        this.reservations = cinemaSystem.reservations;
-        this.members = cinemaSystem.members;
     }
 
     public void run() {
@@ -62,6 +56,7 @@ public class AdminOS {
                     break;
                 }
                 case 0: { // 관리자모드 끝내기
+                	checkBeforeExit();
                     break outerAdmin;
                 }
 
@@ -72,14 +67,14 @@ public class AdminOS {
 
     public void showRevenue() {
         int revenueSum = 0;
-        for (Reservation r : reservations) {
+        for (Reservation r : cs.reservations) {
             revenueSum += r.getTheater().getPrice();
         }
         System.out.println("총 판매액 : " + revenueSum);
     }
 
     public void showReservations() {
-        for (Reservation r : reservations) {
+        for (Reservation r : cs.reservations) {
             System.out.println(r.toString());
         }
     }
@@ -98,7 +93,7 @@ public class AdminOS {
     }
 
     public void showTheaters() {
-        for (int i = 0; i < theaters.size(); i++) {
+        for (int i = 0; i < cs.theaters.size(); i++) {
             System.out.println(i + 1 + "번 상영관");
             System.out.println(cs.theaters.get(i).toString() + "\n");
         }
@@ -106,7 +101,7 @@ public class AdminOS {
 
     public void editTheaters() {
         System.out.println("수정할 상영관 번호를 입력하세요");
-        Theater t = theaters.get(cs.getInputValue() - 1);
+        Theater t = cs.theaters.get(cs.getInputValue() - 1);
         System.out.println("선택된 상영관의 정보");
         System.out.println(t.toString());
         System.out.println("수정할 내용을 선택하세요.");
@@ -138,7 +133,7 @@ public class AdminOS {
 
     // 여기 수정중
     public void addTheaters() {
-        int theaterNo = theaters.size() + 1;
+        int theaterNo = cs.theaters.size() + 1;
         System.out.println(theaterNo + "번 상영관을 추가하시겠습니까? : [1.예]	[2.아니오]");
         switch (cs.getInputValue()) {
             case 1:
@@ -179,10 +174,10 @@ public class AdminOS {
     }
 
     public void showMembers() {
-        for (Member m : this.members) {
+        for (Member m : cs.members) {
             System.out.println(m.toString());
         }
-        System.out.println("총 회원수 : " + members.size());
+        System.out.println("총 회원수 : " + cs.members.size());
     }
 
     public void editMember() {
@@ -190,7 +185,7 @@ public class AdminOS {
         System.out.println("수정하고자 하는 회원의 아이디를 입력하세요");
         System.out.print("입력>>");
         String name = cs.getStringValue();
-        for (Member m : members) {
+        for (Member m : cs.members) {
             if (m.getUserId().equals(name)) {
                 member = m;
                 break;
@@ -205,7 +200,7 @@ public class AdminOS {
             System.out.println(member.toString());
             System.out.println("수정하고자 하는 내용을 선택하세요");
             System.out.println("[1.유저아이디] [2.비밀번호] [3.핸드폰번호] [4.회원이름] [5.적립포인트] [6.관리자권한]");
-            System.out.println("[0. 종료]");
+            System.out.println("[0. 뒤로가기]");
             switch (cs.getInputValue()) {
                 case 1: { // 유저아이디
                     System.out.println("현재 유저의 아이디는 : " + member.getUserId());
@@ -217,7 +212,7 @@ public class AdminOS {
                 case 2: { // 비밀번호
                     System.out.println("현재 유저의 비밀번호는 : " + member.getUserPassword());
                     System.out.println("수정할 값을 입력하세요");
-                    member.setUserPassword(name);
+                    member.setUserPassword(cs.getStringValue());
                     System.out.println("수정된 유저의 비밀번호는 : " + member.getUserPassword());
                     continue;
                 }
@@ -265,9 +260,8 @@ public class AdminOS {
     } // editmember()
 
 	private void saveDatasetMenu() {
-		int selectedNum;
 		System.out.println("저장할 데이터 선택 :");
-		System.out.println("[1.영화-상영관 정보 저장]\t[2.예약내역 저장]\t[3.회원정보 저장]\t[4.모든 데이터 저장]");
+		System.out.println("[1.영화-상영관 정보 저장]\t[2.예약내역 저장]\t[3.회원정보 저장]\t[4.모든 데이터 저장]\n[0.뒤로 가기]");
 		System.out.print("입력> ");
 
 		outer: while (true) {
@@ -290,6 +284,8 @@ public class AdminOS {
 				cs.saveDatasets(cs.members, "Member");
 				cs.saveDatasets(cs.reservations, "Reservation");
 				break outer;
+			case 0:
+				break outer;
 			default: {
 				System.out.println("잘못된 값을 입력하셨습니다.");
 			}
@@ -298,5 +294,17 @@ public class AdminOS {
 		System.out.println();
 
     }
+	
+	public void checkBeforeExit() {
+		System.out.println("저장하기전 현재 상황을 저장하시겠습니까?");
+		System.out.println("그렇다면 YES를 입력해주세요");
+		if(cs.getStringValue().equals("YES")) {
+			System.out.println("모든 데이터를 저장합니다.");
+			cs.saveDatasets(cs.theaters, "Theater");
+			cs.saveDatasets(cs.members, "Member");
+			cs.saveDatasets(cs.reservations, "Reservation");
+			System.out.println();
+		}
+	}
 
 } // class
