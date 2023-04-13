@@ -142,7 +142,7 @@ public class CinemaSystem {
 	
 	public void firstDisplayPrint() {
 	System.out.println("메뉴 선택 :");
-	if(!isLoggedIn) System.out.println("[1.회원 로그인]\t[2.비회원으로 예매]\t[3.회원가입]");	
+	if(!isLoggedIn) System.out.println("[1.회원 로그인]   [2.비회원으로 예매]   [3.회원가입]");	
 	System.out.print("입력> ");
 	}
 	
