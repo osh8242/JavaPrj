@@ -40,14 +40,12 @@ public class CinemaSystem {
 		
 		while(true) {
 
-			firstDisplayPrint();
-
 			switch(getInputValue()) {
 				case 1:{//1.회원 로그인
 					if( (userLoggedIn = login()) != null);{ //일반 회원이라면
 						if(!userLoggedIn.isAdmin()) {
 							ReservationProcess reservationProcess = new ReservationProcess(this);
-							reservationProcess.showReservationMenu(isLoggedIn);
+							reservationProcess.showReservationMenu(isLoggedIn);	
 						} else { //관리자라면							 
 							 AdminOs.run();
 						}
