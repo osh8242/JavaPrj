@@ -20,15 +20,17 @@ public class CinemaSystem {
 		this.isLoggedIn = false;
 		this.theaters = new ArrayList<>();
 		this.members = new ArrayList<>();
-		this.reservations = new ArrayList<>();
+//		this.reservations = new ArrayList<>();
 		this.AdminOs = new AdminOS(this);
 		this.userLoggedIn = null;
 		this.fileIO = new FileIO(this);
-		this.reservationProcess = new ReservationProcess(this);
 		this.validation = new Validation();
-
+//		this.reservationProcess = new ReservationProcess(this);
+//저 조 발표보고 순서바꿔서 했더니 널이어도 되는거 같아요 
 		fileIO.setDatasets();// 초기데이터 셋팅 : 데이터파일 최초 생성시에만 실행
 		getDatasets();// 입력(데이터 불러오기)
+		this.reservations = new ArrayList<>();
+		this.reservationProcess = new ReservationProcess(this);
 		System.out.println("데이터 불러오기완료. ");
 		System.out.println();
 	}

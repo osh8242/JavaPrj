@@ -180,9 +180,9 @@ public class ReservationProcess {
 
 	private void guestBooking(boolean isLoggedIn, int movieNum, int[] inputIntValue) {
 		if (!isLoggedIn) {
-			if (this.cs.reservations == null) {
-				this.cs.reservations = new ArrayList<>();
-			}
+//			if (this.cs.reservations == null) {
+//				this.cs.reservations = new ArrayList<>();
+//			}
 			Reservation arr = new Reservation(guest, cs.theaters.get(movieNum - 1), inputIntValue);
 			cs.reservations.add(arr);
 			System.out.println("예매가 완료되었습니다.");

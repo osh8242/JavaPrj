@@ -41,8 +41,8 @@ public class FileIO {
 			Theater theater2 = cs.theaters.get(1);
 			User user1 = cs.members.get(0);
 			User user2 = cs.members.get(1);
-			cs.reservations.add(new Reservation(user1, theater1, new int[] { 3, 4 }));
-			cs.reservations.add(new Reservation(user2, theater2, new int[] { 1, 1 }));
+//			cs.reservations.add(new Reservation(user1, theater1, new int[] { 3, 4 }));
+//			cs.reservations.add(new Reservation(user2, theater2, new int[] { 1, 1 }));
 
 			// 임시 데이터 파일로 저장
 			saveDataset(cs.theaters, "Theater");
@@ -86,7 +86,7 @@ public class FileIO {
 			try {
 				in.close();
 				bis.close();
-				fis.close();
+				fis.close(); // 파일을 닫을 때 null인지 체크해보기
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
@@ -115,9 +115,16 @@ public class FileIO {
 				out.writeObject(savingDataset);
 			}
 
+		} catch (FileNotFoundException e) { // FileNotFoundException
+			System.out.println("파일이 존재 않습니다.");
+		} catch (EOFException e) {
+			String msg = (e.getMessage() == null) ? "파일을 모두 불러왔습니다." : "에러";
+			System.out.println("... " + msg);
+		} catch (IOException e3) {
+			e3.printStackTrace();
+			System.out.println(fileName + "파일을 읽을 수 없습니다.");
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-
+			System.out.println("나머지 예외");
 		} finally {
 			try {
 				out.close();
