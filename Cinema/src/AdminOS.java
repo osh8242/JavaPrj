@@ -306,8 +306,8 @@ public class AdminOS {
 	
 	public void checkBeforeExit() {
 		System.out.println("저장하기전 현재 상황을 저장하시겠습니까?");
-		System.out.println("그렇다면 YES를 입력해주세요");
-		if(cs.getStringValue().equals("YES")) {
+		System.out.println("그렇다면 yes를 입력해주세요");
+		if(cs.getStringValue().toLowerCase().equals("yes")) {
 			System.out.println("모든 데이터를 저장합니다.");
 			cs.saveDatasets(cs.theaters, "Theater");
 			cs.saveDatasets(cs.members, "Member");

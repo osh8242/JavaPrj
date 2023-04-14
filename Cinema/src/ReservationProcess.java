@@ -5,11 +5,11 @@ import java.util.Arrays;
 public class ReservationProcess {
 
     private CinemaSystem cs;
-    public Guest guest;
-    public Validation validation = new Validation();
+    private Guest guest;
+    private Validation validation = new Validation();
 
-    public ReservationProcess(CinemaSystem cinemaSystem) {
-        this.cs = cinemaSystem;
+    public ReservationProcess(CinemaSystem cs) {
+        this.cs = cs;
     }
 
     public void showReservationMenu(boolean isLoggedIn) {

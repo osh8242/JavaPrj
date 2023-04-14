@@ -1,8 +1,8 @@
 
 public class Member extends User {
-
-	private String userPhoneNumber;
+	
 	private String userId;
+	private String userPhoneNumber;
 	private String userName;
 	private int userPoint;
 	private boolean isAdmin;

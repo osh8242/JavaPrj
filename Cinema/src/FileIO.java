@@ -14,13 +14,13 @@ import java.util.ArrayList;
 public class FileIO {
 	public CinemaSystem cs;
 
-		String path = "D:\\JavaPrj\\IOtest\\"; // 승환
+		String path = "D:\\"; // 승환
 //		String path = "C:\\Users\\KOSA\\Desktop\\JavaPrj-main\\IOtest"; // 나은
 //		String path = "C:\\Team4\\IOtest"; // 석진
 //		String path = "C:\\Users\\KOSA\\TeamProject\\IOtest\\"; // 창현
 
-	public FileIO(CinemaSystem cinemaSystem) {
-		this.cs = cinemaSystem;
+	public FileIO(CinemaSystem cs) {
+		this.cs = cs;
 	}
 	
 	// 초기 데이터 셋팅 함수

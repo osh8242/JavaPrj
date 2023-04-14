@@ -21,15 +21,15 @@ public class Reservation implements Serializable {
 		this.user = user;
 		this.theater = theater;
 		this.seat = seat;
-	}		
-
+	}			
+	
 	public static int getCount() {
 		return count;
 	}
 
 	public static void setCount(int count) {
 		Reservation.count = count;
-	}
+	}	
 
 	public String getReservationNo() {
 		return reservationNo;
