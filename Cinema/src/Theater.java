@@ -1,5 +1,4 @@
 import java.io.Serializable;
-import java.util.Arrays;
 
 public class Theater implements Serializable {
 	private String movie;
@@ -35,38 +34,14 @@ public class Theater implements Serializable {
 		return seat;
 	}
 
-	// 상영관 좌석을 변경하려면 상영관 새로 생성
-//	public void setSeat(String[][] seat) {
-//		this.seat = seat;
-//	}
-	public boolean getIsImax() {
-		return isImax;
-	}
-
 	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
 	@Override
 	public String toString() {
-		return "Theater [movie: " + movie + ", seat: "+seat[0].length+"-"+seat.length + ", isImax: " + isImax + ", price: " + price + "]";
-	}
 
-	public void showSeat() {
-		for (int i = 0; i < seat.length; i++) {
-			for (String seatState : seat[i]) {
-				System.out.printf("[%s]", seatState);
-			}
-			System.out.println();
-		}
+		return "Theater [movie: " + movie + ", seat: {" + seat.length + ", " + seat[0].length + "}, isImax: " + isImax
+				+ ", price: " + price + "]";
 	}
-
-	public String getClassName() {
-		return "Theater";
-	}
-
 }

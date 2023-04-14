@@ -27,49 +27,40 @@ public class CinemaSystem {
 		this.reservationProcess = new ReservationProcess(this);
 		this.validation = new Validation();
 
-		this.theaters = new ArrayList<Theater>();
-		this.members = new ArrayList<Member>();
-		this.reservations = new ArrayList<Reservation>(1);
-		this.AdminOs = new AdminOS(this);
-		this.fileIO = new FileIO(this);
-		this.userLoggedIn = null;
-
 		fileIO.setDatasets();// 초기데이터 셋팅 : 데이터파일 최초 생성시에만 실행
 		getDatasets();// 입력(데이터 불러오기)
 		System.out.println("데이터 불러오기완료. ");
 		System.out.println();
-
-//        this.br = br;
-//        this.userLoggedIn = userLoggedIn;
 	}
 
 	public void run() {
 
-		while (true) {			
+		while (true) {
+
 			firstDisplayPrint();
 			switch (getInputValue()) {
-				case 1: {// 1.회원 로그인 / 회원예매하기
-					userLoggedIn = login();
-					if (userLoggedIn == null)
-						break;
-					if (!userLoggedIn.isAdmin()) {
-						reservationProcess.showReservationMenu(isLoggedIn);				
-					} else { // 관리자라면
-						AdminOs = new AdminOS(this);
-						AdminOs.run();					
-					}
-					isLoggedIn = !isLoggedIn;
-					userLoggedIn = null;
+			case 1: {// 1.회원 로그인 / 회원예매하기
+				userLoggedIn = login();
+				if (userLoggedIn == null)
 					break;
-				} // 로그인
-				case 2: {// 2.비회원으로 예매
+				if (!userLoggedIn.isAdmin()) {
 					reservationProcess.showReservationMenu(isLoggedIn);
-					break;
+				} else { // 관리자라면
+					AdminOs = new AdminOS(this);
+					AdminOs.run();
 				}
-				case 3: {// 3.회원가입
-					createUser();
-					break;
-				}
+				isLoggedIn = !isLoggedIn;
+				userLoggedIn = null;
+				break;
+			} // 로그인
+			case 2: {// 2.비회원으로 예매
+				reservationProcess.showReservationMenu(isLoggedIn);
+				break;
+			}
+			case 3: {// 3.회원가입
+				createUser();
+				break;
+			}
 			}// swtich
 		} // while
 	}// run()
@@ -87,14 +78,11 @@ public class CinemaSystem {
 		this.theaters = fileIO.loadDataset("Theater");
 		this.members = fileIO.loadDataset("Member");
 		this.reservations = fileIO.loadDataset("Reservation");
-		if(this.reservations!=null) {
-			String temp = this.reservations.get(this.reservations.size()-1).getReservationNo();
-			temp = temp.substring(temp.indexOf("-")+1); 
+		if (this.reservations != null) {
+			String temp = this.reservations.get(this.reservations.size() - 1).getReservationNo();
+			temp = temp.substring(temp.indexOf("-") + 1);
 			this.reservations.get(0).setCount(Integer.parseInt(temp));
 		}
-			
-			
-//		System.out.println("로딩완료");
 	}
 
 	public int getInputValue() {
@@ -161,8 +149,8 @@ public class CinemaSystem {
 			System.out.println("희망하는 회원ID를 입력하세요.(시작은 영문으로만, '_'를 제외한 특수문자 안되며 영문, 숫자, '_'으로만 이루어진 5 ~ 12자 이하)");
 			userId = getStringValue();
 			if (validation.isValidId(userId)) {
-				for(Member m : members) {
-					if(userId.equals(m.getUserId())) {
+				for (Member m : members) {
+					if (userId.equals(m.getUserId())) {
 						System.out.println("이미 사용중인 아이디입니다");
 						createUser();
 					}
