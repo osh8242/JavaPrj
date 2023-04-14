@@ -1,6 +1,5 @@
-
 public class Member extends User {
-	
+
 	private String userId;
 	private String userPhoneNumber;
 	private String userName;
