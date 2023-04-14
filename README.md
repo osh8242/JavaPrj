@@ -1,4 +1,4 @@
 # JavaPrj
 
-Cinema Reservation System
- - final version -
+[Cinema Reservation System]
+final version
