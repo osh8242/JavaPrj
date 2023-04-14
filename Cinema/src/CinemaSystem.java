@@ -102,14 +102,14 @@ public class CinemaSystem {
 		}
 	}
 
-	public void firstDisplayPrint() {
+	private void firstDisplayPrint() {
 		System.out.println("메뉴 선택 :");
 		if (!isLoggedIn)
 			System.out.println("[1.회원 로그인]   [2.비회원으로 예매]   [3.회원가입]");
 		System.out.print("입력> ");
 	}
 
-	public Member login() {
+	private Member login() {
 		System.out.print("아이디를 입력해주세요 : ");
 		String id = getStringValue();
 		for (Member m : members) {
@@ -135,7 +135,7 @@ public class CinemaSystem {
 		return null;
 	}
 
-	public void createUser() {
+	private void createUser() {
 
 		String userId;
 		String userPassword;
