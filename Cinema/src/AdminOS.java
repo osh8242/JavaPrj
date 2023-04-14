@@ -95,8 +95,8 @@ public class AdminOS {
     public void showTheaters() {
         for (int i = 0; i < cs.theaters.size(); i++) {
             System.out.println(i + 1 + "번 상영관");
-            System.out.println(cs.theaters.get(i).toString() + "\n");
-            cs.theaters.get(i).showSeat();
+            System.out.println(cs.theaters.get(i).toString());
+            System.out.println();
         }
     }
 
@@ -129,7 +129,7 @@ public class AdminOS {
             }
 
         }
-
+        System.out.println();
     }
 
     // 여기 수정중
@@ -179,6 +179,7 @@ public class AdminOS {
             System.out.println(m.toString());
         }
         System.out.println("총 회원수 : " + cs.members.size());
+        System.out.println();
     }
 
     public void editMember() {
