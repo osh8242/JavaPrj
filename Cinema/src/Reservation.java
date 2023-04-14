@@ -21,30 +21,18 @@ public class Reservation implements Serializable {
 		this.user = user;
 		this.theater = theater;
 		this.seat = seat;
-	}			
-	
-	public static int getCount() {
-		return count;
 	}
 
 	public static void setCount(int count) {
 		Reservation.count = count;
-	}	
+	}
 
 	public String getReservationNo() {
 		return reservationNo;
 	}
 
-	public void setReservationNo(String reservationNo) {
-		this.reservationNo = reservationNo;
-	}
-
 	public User getUser() {
 		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public Theater getTheater() {
@@ -59,18 +47,9 @@ public class Reservation implements Serializable {
 		return seat;
 	}
 
-	public void setSeat(int[] seat) {
-		this.seat = seat;
-	}
-
 	@Override
 	public String toString() {
 		return "Reservation [reservationNo : " + reservationNo + ", user : " + user + ", theater : " + theater
 				+ ", seat : " + Arrays.toString(seat) + "]";
 	}
-//	@Override
-//	public String getClassName() {
-//		return "Reservation";
-//	}
-
 }
